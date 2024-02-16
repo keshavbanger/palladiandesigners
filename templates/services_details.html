@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Palladian Designers | Services detail 
+{% endblock title %}
+{% block content %}
+<!--MAIN BODY-->
+    <div class="top-banner big light vindow-height">
+        <span class="overlay"></span>
+        <img src="{% static 'img/planning/1666b643174379.57e5b1bdd749f.jpg' %}" class="s-img-switch" alt="banner image" />
+        <div class="content">
+            <div class="subtitle">SERVICE</div>
+            <h1 class="title">{{service_detail.service}}</h1>
+        </div>
+    </div>
+
+    <div class="container padd-only-xs margin-xs-20t margin-md-0t">
+        <div class="row">
+            <div class="col-xs-12 padd-only-xs">
+                <!-- Post content -->
+                <div class="services-detailed">
+
+                    <div class="post-content">
+                        {{service_detail.text|safe}}
+                    </div>
+                </div>
+                <!-- End post conte nt -->
+            </div>
+        </div>
+    </div>
+    <!--/MAIN BODY-->
+{% endblock content %}

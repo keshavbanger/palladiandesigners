@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Palladian Designers | Pricing Plan
+{% endblock title %}
+{% block content %}
+    <!--MAIN BODY-->
+    <div class="container-fluid no-padd">
+        <img src="{% static 'img/pricing-simple/proc4.jpg' %}" alt="background image" class="s-img-switch"/>
+        <div  class="row-fluid no-padd">
+            <span class="enable_overlay no-padd"></span>
+            <div class="col-sm-12 no-padd">
+                        <div class="container-fluid top-banner no-padd  simple  light no-marg-bottom vindow-height">
+                            <div class="content">
+                                <div class="prague-svg-animation-text">
+                                </div>
+
+                                <div class="subtitle">PRICING</div>
+                                <h2 class="title">Choose type of Your Need.</h2>
+                            </div>
+                            <div class="top-banner-cursor"></div>
+                        </div>
+            </div>
+      
+            <div class="container no-padd">
+            {% for plan in pricing_plan %}
+                <div class="col-sm-6 col-md-3 col-xs-12 ">
+
+                <div class="prague-pricing-wrapper  simple">
+                    <div class="prague-pricing-content-wrapper">
+
+                        <div class="prague-pricing-subtitle">
+                            {{plan.project_category}} </div>
+
+                        <h3 class="prague-pricing-price">
+                            ${{plan.price}} </h3>
+
+
+                        <div class="prague-pricing-description">
+                            {{plan.text|safe}}
+                        </div>
+
+                        <a class="prague-pricing-link a-btn-2 creative" href="{% url 'contactus' %}"
+                            target=" _blank">
+                            <span class="a-btn-line"></span>
+                            CONTINUE </a>
+                    </div>
+                </div>
+
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!--/MAIN BODY-->
+{% endblock content %}

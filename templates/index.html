@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block title %}
+    Palladian Designers | Home Page
+{% endblock title %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12 no-padd">
+            <div class="container-fluid top-banner no-padd  big fullheight light">
+                {% if slider_img %}
+                    <img src="{{ MEDIA_URL }}{{ slider_img }}" class="s-img-switch" alt="top-banner image" />
+                {% else %}
+                {% endif %}
+                <span class="overlay"></span>
+                <div class="content" style="margin-top: 250px !important;">
+                    <div class="prague-svg-animation-text"></div>
+                    {% comment %} <div class="subtitle">Indore, Madhya Pradesh</div>
+                    <h1 class="title">Palladian Designers<br /></h1>
+                    <div class="description">
+                        <p>Designing & Drafting Services</p>
+                    </div> {% endcomment %}
+                    <a href="{% url 'projects' %}" class="a-btn creative" target=" _blank">
+                        <span class="a-btn-line "></span>EXPLORE IT</a>
+                </div>
+                <div class="top-banner-cursor"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container no-padd">
+    <div class="row-fluid  margin-lg-140t margin-sm-70t">
+        <div class="col-sm-8 col-lg-offset-0 no-padd col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-2 col-xs-12  margin-lg-65t margin-sm-0t">
+            <div class="vc_column-inner margin-minus-left">
+                    <div class="prague-counter  alone_item no-figure">
+
+                        <div class="figures ">
+                            <!-- triangle -->
+                        </div>
+
+                        <div class="counter-outer" style="padding:15px;">
+
+                            <img src="{% static 'img/home/stock-photo-66175729.jpg' %}" data-lazy-src="{% static 'img/home/stock-photo-66175729.jpg' %}" alt="experience image"
+                                class="prague-counter-img s-img-switch">
+
+                            <div class="numbers">
+                                <svg>
+                                    <defs>
+                                        <mask id="coming_mask_0" x="0" y="0">
+                                            <rect class="coming-alpha" x="0" y="0" width="100%" height="100%"></rect>
+                                            <text class="count number" x="50%" y="45%" text-anchor="middle"
+                                                alignment-baseline="middle">{{total_company_years}}</text>
+                                            <text class="count title" x="50%" y="70%" text-anchor="middle"
+                                                alignment-baseline="middle">YEARS OF EXPERIENCE</text>
+                                        </mask>
+                                    </defs>
+                                    <rect style="-webkit-mask: url(#coming_mask_0); mask: url(#coming_mask_0);" class="base"
+                                        x="0" y="0" width="100%" height="100%"></rect>
+                                </svg>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class=" no-padd col-sm-12 col-lg-offset-1 col-lg-7 col-md-offset-0 col-md-7 col-sm-offset-0 col-xs-12  margin-sm-20t">
+                    <div class="heading  left dark">
+                        <div class="subtitle ">ABOUT US</div>
+                        <h2 class="title">{{about.heading}}</h2>
+                        <div class="content ">
+                            {{about.text|safe}}
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="margin-lg-20t margin-sm-30t">
+        <div class="container">
+            <div class="row">
+
+                <div class="column colum-container col-sm-12 no-padd margin-lg-20b">
+                    <div class="heading  left dark">
+
+                        <div class="subtitle ">LAST PROJECTS</div>
+                        <h2 class="title">Make it with passion.</h2>
+                    </div>
+                </div>
+
+                <div class="no-padd-left no-padd-right margin-lg-20t">
+                    <div class="wrapper">
+                        <div data-unique-key="139714cb2b9c35c987d2544328454258" class="js-load-more" data-start-page="1"
+                            data-max-page="5" data-next-link="http://prague.loc/page/2/">
+                            <div class="row prague_list prague_count_col1 prague_gap_col10  no-footer-content no-figure prague-load-wrapper"
+                                data-columns="prague_count_col1" data-gap="prague_gap_col10">
+                                {% for project in projects %}
+                                    <div class="project-list-item">
+                                        <div class="project-list-outer">
+
+                                            <div class="project-list-wrapper">
+
+                                                <div class="project-list-img">
+                                                    <img src="media/{{project.project_banner_image}}" data-lazy-src="media/{{project.project_banner_image}}" class="s-img-switch"
+                                                        alt="seascape-villa image" />
+                                                </div>
+
+                                                <div class="project-list-content">
+
+                                                    <div class="project-list-category">{{project.year}}</div>
+                                                    <h3 class="project-list-title"><a href="seascape-villa.html" target="_self">{{project.title}}</a></h3>
+                                                    <div class="project-list-excerpt">
+                                                        <p>{{project.description}}</p>
+                                                    </div>
+                                                    <a href="{% url 'project-details' project.slug%}" class="project-list-link a-btn-arrow-2"
+                                                        target="_self">
+                                                        <span class="arrow-right"></span>
+                                                        READ</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="heading  left dark container">
+
+        <div class="subtitle ">Client Reviews</div>
+        <h2 class="title">They love us.</h2>
+
+    </div>
+
+    <div class="container">
+        <div class="row  row-fluid margin-lg-10t margin-lg-145b margin-sm-70b">
+            <div class="testimonials-wrapper  no-figure">
+                <div class="testimonials-swiper swiper-container" data-speed='2000' data-loop='1' data-autoplay='3000'
+                    data-center='0' data-mode='vertical' data-slides-per-view='1' data-lg-slides='1,0' data-md-slides='1,0'
+                    data-sm-slides='1,0' data-xs-slides='1,0'>
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        {% for client_review in testimonials %}
+                            <div class="swiper-slide">
+                                <div class="testimonials-item">
+
+                                    <span class="testimonials-icon fa fa fa-quote-right"></span>
+
+                                    <blockquote class="testimonials-description">
+                                        <p>{{client_review.feedback}}</p>
+                                    </blockquote>
+                                    <h4 class="testimonials-author">{{client_review.client_name}}</h4>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                    <!-- If we need pagination -->
+                    <div class="testimonials-pagination-wrapper">
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
