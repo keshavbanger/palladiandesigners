@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'core',
     'django_ckeditor_5',
     "debug_toolbar",
+    "careers",
 ]
 
 MIDDLEWARE = [

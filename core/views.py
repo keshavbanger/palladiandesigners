@@ -5,13 +5,14 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
-
+from django.db.models import Q
 
 def index(request):
     slider_img = Slider.objects.filter(is_visible = True).last()
     projects = Project.objects.all().order_by("-year")
     testimonials = ClientReview.objects.all().order_by('-created_at')
     about = AboutUs.objects.all().first()
+    top_clients = ClientPage.objects.all()[0:4]
     year = about.year
     context = {
         "slider_img": slider_img,
@@ -19,6 +20,7 @@ def index(request):
         "testimonials": testimonials,
         "about": about,
         "total_company_years": year,
+        "top_clients": top_clients
     }
     return render(request, 'index.html', context)
 
@@ -33,12 +35,23 @@ def about_us(request):
 def projects(request):
     projects = Project.objects.all()
     project_cat = ProjectCategory.objects.all()
+    
     context = {
         "projects": projects,
         "header_dark": "dark",
         "show_filter": True,
         "project_cat": project_cat
     }
+
+    category_ids = [request.GET.get(f'filter_val{i}') for i in range(1, len(project_cat))]
+    category_ids = [cat_id for cat_id in category_ids if cat_id is not None and cat_id.isdigit()]
+
+    if category_ids:
+        project_cat_inside = ProjectCategory.objects.filter(id__in=category_ids)
+        projects = Project.objects.filter(project_category__in=project_cat_inside)
+
+        context["projects"] = projects
+
     return render(request, 'work-grid.html', context)
 
 def project_detail_view(request, slug):
@@ -51,6 +64,7 @@ def project_detail_view(request, slug):
         "project_cat": project_cat.upper(),
         "title": title,
         "project": project,
+        "total_image": len(project_images)
     }
     return render(request, 'project_details.html', context)
 
@@ -64,6 +78,7 @@ def services(request):
 
 
 def contact_us(request):
+    show_msg = False
     if request.method == "POST":
         name = request.POST.get("name")
         email = request.POST.get("email")
@@ -76,16 +91,17 @@ def contact_us(request):
             message = message
         )
         contact_form.save()
-        res = send_mail_admin(name, email, mobile_no, message)
+        send_mail_admin(name, email, mobile_no, message)
+        show_msg = True
         print("Mail Sent Successfully")
-        return redirect("contactus")
-    return render(request, 'contact-us.html')
+        return render(request, 'contact-us.html', {"show_msg": show_msg})
+    return render(request, 'contact-us.html', {"show_msg": show_msg})
 
 def send_mail_admin(name, email, mobile_no, message):
-    html_content = render_to_string('static/emails/contact_email.html', {'name': name, 'email': email, 'message': message})
+    html_content = render_to_string('static/emails/contact_email.html', {'name': name, 'email': email, "mobile_no": mobile_no, 'message': message})
     text_content = strip_tags(html_content)
-    # admin_email = "harshit.s@goldeneagle.ai"
-    admin_email = "harshitshreshthi8@gmail.com"
+    admin_email = "harshit.s@goldeneagle.ai"
+    # admin_email = "services@palladiandesigners.com"
     msg = EmailMultiAlternatives(
         'User Contact Query Message',
         text_content,
@@ -105,7 +121,7 @@ def pricing_plan(request):
 
 
 def clients(request):
-    client_pages = ClientPage.objects.all()
+    client_pages = ClientPage.objects.all().order_by("-created_at")
     context = {
         "client_pages": client_pages,
         "header_dark": "dark",
@@ -115,10 +131,11 @@ def clients(request):
 
 def service_detail(request, id):
     try:
-        service_detail = ServiceDetail.objects.get(id = id)
+        service_detail = ServiceDetail.objects.get(service__id = id)
     except ServiceDetail.DoesNotExist:
         return render(request, '404.html')
     context = {
         "service_detail": service_detail
     }
     return render(request, 'services_details.html', context)
+

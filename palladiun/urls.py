@@ -15,25 +15,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
+
 
 
 admin.site.site_header = 'PALLADIAN DESIGNERS'
 admin.site.site_title = 'Palladian Designers'
 admin.site.index_title = 'Welcome to Palladian Designers'
 
-
-# admin.site.site_header = 'Paytax'
-# admin.site.site_title = 'Paytax'
-# admin.site.index_title = 'Welcome to Paytax'
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    path('careers/', include('careers.urls')),
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
     path("__debug__/", include("debug_toolbar.urls")),
+    # re_path(r'^.*$', TemplateView.as_view(template_name='404.html'), name='404'),
 ]
 
 if settings.DEBUG:
