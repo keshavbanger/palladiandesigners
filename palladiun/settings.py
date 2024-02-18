@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django_ckeditor_5',
     "debug_toolbar",
     "careers",
+    "django_recaptcha",
+    "fontawesome_free",
 ]
 
 MIDDLEWARE = [
@@ -244,3 +246,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+RECAPTCHA_PUBLIC_KEY = '6LfkJXcpAAAAAAbihI1rjFsUd40GLoRXl4pvQ0M5'
+RECAPTCHA_PRIVATE_KEY = '6LfkJXcpAAAAABxiG_bq5YiztWw906MTDYjv2uGD'

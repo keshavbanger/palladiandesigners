@@ -28,12 +28,13 @@ Palladian Designers | Pricing Plan
 
                 <div class="prague-pricing-wrapper  simple">
                     <div class="prague-pricing-content-wrapper">
-
                         <div class="prague-pricing-subtitle">
                             {{plan.project_category}} </div>
-
-                        <h3 class="prague-pricing-price">
-                            ${{plan.price}} </h3>
+                            {% if plan.project_category == 'BIM' %}
+                               <h3 class="prague-pricing-price"> ${{plan.price}} </h3>
+                            {% else %}
+                            <h3 class="prague-pricing-price"> {{plan.price}} <i class="fas fa-rupee-sign"></i> </h3>
+                            {% endif %}
 
 
                         <div class="prague-pricing-description">

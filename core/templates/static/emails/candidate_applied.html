@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        .user-query {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Job Application Received - Palladian Designers</h1>
+        <p>Hello Shivam,</p>
+        <p>Candidate Applied for a Job for the Position of <b>{{position_name}}</b></p>
+
+        <div class="user-query">
+            <p><strong>Candidate Name:</strong> {{first_name}} {{last_name}}</p>
+            <p><strong>Mobile No:</strong> {{mobile_no}}</p>
+            <p><strong>Email:</strong> {{email}}</p>
+            <p><strong>Job Role:</strong> {{position_name}}</p>
+        </div>
+
+        <p>Please respond to the user's query as soon as possible.</p>
+
+        <div class="footer">
+            <p>Thank you</p>
+        </div>
+    </div>
+</body>
+</html>

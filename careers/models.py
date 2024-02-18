@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
+from django.core.exceptions import ValidationError
 import uuid
 # Create your models here.
 
@@ -13,7 +14,12 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class Career(BaseModel):
+def validate_file_size(value):
+    limit = 2 * 1024 * 1024  # 2MB
+    if value.size > limit:
+        raise ValidationError(_('File size must be no more than 2 MB.'))
+
+class CurrentOpenning(BaseModel):
     job_title = models.CharField(max_length = 100)
     slug = models.SlugField(unique=True, blank=True)
     location = models.CharField(default = "INDORE", max_length = 20)
@@ -27,7 +33,7 @@ class Career(BaseModel):
             # Ensure the slug is unique
             original_slug = self.slug
             count = 1
-            while Career.objects.filter(slug=self.slug).exists():
+            while CurrentOpenning.objects.filter(slug=self.slug).exists():
                 self.slug = f"{original_slug}-{count}"
                 count += 1
 
@@ -36,16 +42,16 @@ class Career(BaseModel):
     def __str__(self) -> str:
         return self.job_title
     
-class JobDetail(BaseModel):
-    job = models.ForeignKey(Career, on_delete = models.CASCADE)
+class JobOpeningDetail(BaseModel):
+    job = models.ForeignKey(CurrentOpenning, on_delete = models.CASCADE)
     text = CKEditor5Field('Text', config_name='extends')
 
     def __str__(self) -> str:
         return self.job.job_title
 
-class CandidateProfile(BaseModel):
-    job_detail = models.OneToOneField(JobDetail, on_delete = models.CASCADE)
-    candidate_resume = models.FileField(upload_to="candidate_resume/")
+class AppliedCandidateProfile(BaseModel):
+    job_detail = models.OneToOneField(JobOpeningDetail, on_delete = models.CASCADE)
+    candidate_resume = models.FileField(upload_to="candidate_resume/", validators=[validate_file_size])
     first_name = models.CharField(max_length = 50)
     last_name = models.CharField(max_length = 50)
     email = models.EmailField(unique = True)

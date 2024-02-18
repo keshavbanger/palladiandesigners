@@ -46,7 +46,12 @@
                         <div class="column-inner ">
                                 <div class="wrapper">
                                         <div class="heading  Center dark">
+                                                {% if careers %}
+                                                
                                                 <div class="subtitle ">CURRENT OPENINGS</div>
+                                                {% else %}
+                                                <div class="subtitle ">Sorry! We are not accepting any applications right now.</div>
+                                                {% endif %}
                                         </div>
                                 </div>
                         </div>

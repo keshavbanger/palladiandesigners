@@ -133,7 +133,7 @@ def service_detail(request, id):
     try:
         service_detail = ServiceDetail.objects.get(service__id = id)
     except ServiceDetail.DoesNotExist:
-        return render(request, '404.html')
+        return render(request, '404.html', {"header_dark": "dark"})
     context = {
         "service_detail": service_detail
     }

@@ -19,7 +19,38 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'css/unit-test.css'%}">
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        /* Style for the container */
+        .file-input-container {
+            position: relative;
+            width: 200px;
+            margin: 20px;
+        }
 
+        /* Style for the file input */
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Style for the fake button */
+        .fake-button {
+            display: inline-block;
+            padding: 10px;
+            background-color: #4c4c4c;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 

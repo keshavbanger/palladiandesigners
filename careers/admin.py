@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Career, JobDetail, CandidateProfile
+from .models import CurrentOpenning, JobOpeningDetail, AppliedCandidateProfile
 
 # Register your models here.
-class CareerAdmin(admin.ModelAdmin):
+class CurrentOpenningAdmin(admin.ModelAdmin):
     list_display = ["job_title", "location", "is_active"]
     prepopulated_fields = {"slug": ["job_title"]}
 
 
-admin.site.register(Career, CareerAdmin)
-admin.site.register(JobDetail)
-admin.site.register(CandidateProfile)
+admin.site.register(CurrentOpenning, CurrentOpenningAdmin)
+admin.site.register(JobOpeningDetail)
+admin.site.register(AppliedCandidateProfile)
