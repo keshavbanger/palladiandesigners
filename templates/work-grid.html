@@ -23,7 +23,7 @@ Palladian Designers | Projects
                                             </div>
                                         </a>
                                         <div class="project-grid-item-content">
-                                            <h4 class="project-grid-item-title"><a href="seascape-villa.html" target="_self">{{proj.title}}</a></h4>
+                                            <h4 class="project-grid-item-title"><a href="{% url 'project-details' proj.slug %}" target="_self">{{proj.title}}</a></h4>
                                             <div class="project-grid-item-category">{{proj.project_category}}</div>
                                         </div>
                                     </div>

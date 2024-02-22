@@ -28,9 +28,9 @@ admin.site.index_title = 'Welcome to Palladian Designers'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
     path('', include('core.urls')),
     path('careers/', include('careers.urls')),
-    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
     path("__debug__/", include("debug_toolbar.urls")),
     # re_path(r'^.*$', TemplateView.as_view(template_name='404.html'), name='404'),
 ]

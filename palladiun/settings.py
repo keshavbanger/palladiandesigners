@@ -153,6 +153,16 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
+
+RECAPTCHA_PUBLIC_KEY = '6LfkJXcpAAAAAAbihI1rjFsUd40GLoRXl4pvQ0M5'
+RECAPTCHA_PRIVATE_KEY = '6LfkJXcpAAAAABxiG_bq5YiztWw906MTDYjv2uGD'
+
+
 customColorPalette = [
         {
             'color': 'hsl(4, 90%, 58%)',
@@ -180,6 +190,8 @@ customColorPalette = [
         },
     ]
 
+# CKEDITOR_5_CUSTOM_CSS = 'path_to.css' # optional
+# CKEDITOR_5_FILE_STORAGE = "path_to_storage.CustomStorage" # optional
 CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': ['heading', '|', 'bold', 'italic', 'link',
@@ -240,12 +252,3 @@ CKEDITOR_5_CONFIGS = {
         }
     }
 }
-
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
-
-RECAPTCHA_PUBLIC_KEY = '6LfkJXcpAAAAAAbihI1rjFsUd40GLoRXl4pvQ0M5'
-RECAPTCHA_PRIVATE_KEY = '6LfkJXcpAAAAABxiG_bq5YiztWw906MTDYjv2uGD'
