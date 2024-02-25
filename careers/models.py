@@ -52,6 +52,7 @@ class JobOpeningDetail(BaseModel):
 class AppliedCandidateProfile(BaseModel):
     job_detail = models.OneToOneField(JobOpeningDetail, on_delete = models.CASCADE)
     candidate_resume = models.FileField(upload_to="candidate_resume/", validators=[validate_file_size])
+    candidate_portfolio = models.FileField(upload_to="candidate_portfolio/", blank=True, null=True)
     first_name = models.CharField(max_length = 50)
     last_name = models.CharField(max_length = 50)
     email = models.EmailField(unique = True)

@@ -38,6 +38,7 @@ def job_detail(request, career_id):
         job_candidate_detail = JobOpeningDetail.objects.get(id = job_career_detail)
         first_name = request.POST.get("first_name")
         candidate_resume = request.FILES["candidate_resume"]
+        candidate_portfolio = request.FILES["candidate_portfolio"]
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
         phone_number = request.POST.get("phone_number")
@@ -50,6 +51,7 @@ def job_detail(request, career_id):
             candidate = AppliedCandidateProfile(
                 job_detail=job_candidate_detail,
                 candidate_resume=candidate_resume,
+                candidate_portfolio=candidate_portfolio,
                 first_name=first_name,
                 last_name=last_name,
                 email=email,

@@ -21,7 +21,7 @@ class Slider(BaseModel):
     
 class Service(BaseModel):
     title = models.CharField(max_length = 100)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
 
 
     def __str__(self) -> str:
@@ -109,6 +109,7 @@ class AboutUs(models.Model):
 class TeamMember(models.Model):
     name = models.CharField(max_length = 50)
     image = models.ImageField(upload_to="team_members/")
+    social_profile = models.CharField(max_length = 50, blank=True, null=True)
     designation = models.CharField(max_length = 50)
 
 
