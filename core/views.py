@@ -59,11 +59,21 @@ def project_detail_view(request, slug):
     project_cat = project.project_category.title
     title = project.title
     project_images = ProjectImage.objects.filter(project=project).select_related('project')
+    if project_images.exists():
+        last_image = project_images.last()
+        # Check if the last image has the attribute is_project_last_image
+        if hasattr(last_image, "is_project_last_image") and last_image.is_project_last_image:
+            project_image_desc = last_image.project_short_des
+        else:
+            project_image_desc = ""
+    else:
+        project_image_desc = ""
     context = {
         "images": project_images,
         "project_cat": project_cat.upper(),
         "title": title,
         "project": project,
+        "project_image_desc": project_image_desc,
         "total_image": len(project_images)
     }
     return render(request, 'project_details.html', context)

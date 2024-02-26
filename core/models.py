@@ -75,6 +75,9 @@ class Project(BaseModel):
 class ProjectImage(BaseModel):
     project = models.ForeignKey(Project, on_delete = models.CASCADE)
     project_image = models.ImageField(upload_to="project_images/")
+    is_project_last_image = models.BooleanField(default = False)
+    project_short_des = models.TextField(blank = True, null = True, help_text='Fill this field if is project last image is checked!',)
+
     
     def __str__(self) -> str:
         return self.project.title
