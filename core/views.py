@@ -25,7 +25,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 def about_us(request):
-    team_members = TeamMember.objects.all()
+    team_members = TeamMember.objects.all().order_by("created_at")
     context = {
         "team_members": team_members
     }
@@ -59,18 +59,28 @@ def project_detail_view(request, slug):
     project_cat = project.project_category.title
     title = project.title
     project_images = ProjectImage.objects.filter(project=project).select_related('project')
+    if project_images.exists():
+        last_image = project_images.last()
+        # Check if the last image has the attribute is_project_last_image
+        if hasattr(last_image, "is_project_last_image") and last_image.is_project_last_image:
+            project_image_desc = last_image.project_short_des
+        else:
+            project_image_desc = ""
+    else:
+        project_image_desc = ""
     context = {
         "images": project_images,
         "project_cat": project_cat.upper(),
         "title": title,
         "project": project,
+        "project_image_desc": project_image_desc,
         "total_image": len(project_images)
     }
     return render(request, 'project_details.html', context)
 
 
 def services(request):
-    services = Service.objects.all()
+    services = Service.objects.all().order_by("-created_at")
     context = {
         "services": services
     }
@@ -100,8 +110,8 @@ def contact_us(request):
 def send_mail_admin(name, email, mobile_no, message):
     html_content = render_to_string('static/emails/contact_email.html', {'name': name, 'email': email, "mobile_no": mobile_no, 'message': message})
     text_content = strip_tags(html_content)
-    admin_email = "harshit.s@goldeneagle.ai"
-    # admin_email = "services@palladiandesigners.com"
+    # admin_email = "harshit.s@goldeneagle.ai"
+    admin_email = "services@palladiandesigners.com"
     msg = EmailMultiAlternatives(
         'User Contact Query Message',
         text_content,

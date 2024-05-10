@@ -25,10 +25,10 @@ Palladian Designers | Projects-Details
                 <img src="/media/{{image.project_image}}" class="attachment-full size-full" alt="banner image"/> 
             </div>
         </div>
-        {% if total_image == forloop.counter %}
+        {% if total_image == forloop.counter%}
             <div class="project-detail-parallax-item">
                 <div class="detail-parallax-item-footer">
-                    <h6 class="detail-parallax-item-footer-subtitle">COMMERCIAL PROJECT. HOUSE, JORDAN. </h6>
+                    <h6 class="detail-parallax-item-footer-subtitle">{{project_image_desc}}</h6>
                 </div>
             </div>
         {% endif %}

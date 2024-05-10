@@ -34,13 +34,25 @@ class ProjectAdmin(admin.ModelAdmin):
 class ContactFormAdmin(admin.ModelAdmin):
     list_display = ["name", "email", "mobile_no", "created_at"]
 
+
+class ProjectImageAdmin(admin.ModelAdmin):
+    list_display = ("project", "project_image_tag")
+    ordering = ("-created_at",)
+    def project_image_tag(self, obj):
+        folder_path = 'media/project_images'
+        file_name = obj.project_image.url.split("/")[3]
+        file_path = os.path.join(folder_path, file_name)
+        if os.path.exists(file_path):
+            return format_html(f'<img src="{obj.project_image.url}" width="80" height="80" />')
+        return format_html(f'<img src="{settings.BASE_URL}/{folder_path}/default_img.png" width="80" height="80" />')
+
 admin.site.register(Slider, SliderAdmin)
 admin.site.register(Service)
 admin.site.register(ProjectCategory)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(ClientReview)
 admin.site.register(ContactForm, ContactFormAdmin)
-admin.site.register(ProjectImage)
+admin.site.register(ProjectImage, ProjectImageAdmin)
 admin.site.register(AboutUs)
 admin.site.register(TeamMember)
 admin.site.register(FooterContent)

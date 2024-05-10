@@ -30,7 +30,7 @@
     <div class="container no-padd no-padd margin-lg-70t margin-sm-40t margin-lg-110b margin-xs-70b">
         <div class="row-fluid "></div>
         <div class="row-fluid no-padd margin-lg-30t margin-lg-110b margin-sm-20t margin-sm-70b">
-            <div class="col-sm-12 col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-offset-0 col-xs-12 no-padd">
+            <div style="text-align: justify;" class="col-sm-12 col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-offset-0 col-xs-12 no-padd">
                 {{ job_career_detail.text|safe }}
             </div>
             <input type="hidden" name="item_key" value="" />
@@ -80,17 +80,23 @@
                                                         </div> {% endcomment %}
                                                             <span class="uploadLimitNote">(File size should be &lt;= 2MB)</span>
                                                         <div class="row">
-                                                            <div id = "frm_field_20_container" class="col-md-2 frm_form_field form-field  frm_none_container">
-                                                                <label for="fileInput" class="fake-button">Choose File</label>
+                                                            <div id = "frm_field_20_container" class="col-md-3 frm_form_field form-field  frm_none_container">
+                                                                <label for="fileInput" class="fake-button">Choose Resume</label>
                                                                 <input type="file" class="file-input" id="pdf_upload" required name="candidate_resume"
                                                                     placeholder="Upload Resume" data-reqmsg="This field cannot be blank."
                                                                     data-invmsg="Upload Resume" />
                                                             </div>
-                                                            <div id = "frm_field_20_container" class="col-md-5 frm_form_field form-field  frm_none_container">
+                                                            <div id = "frm_field_20_container" class="col-md-3 frm_form_field form-field  frm_none_container">
+                                                                <label for="fileInput" class="fake-button">Choose Portfolio</label>
+                                                                <input type="file" class="file-input" id="portfolio_upload" name="candidate_portfolio"
+                                                                    placeholder="Upload Portfolio" data-reqmsg="This field cannot be blank."
+                                                                    data-invmsg="Upload Portfolio" />
+                                                            </div>
+                                                            <div id = "frm_field_20_container" class="col-md-3 frm_form_field form-field  frm_none_container">
                                                                 <input required type="text" id="field_rposy" name="first_name" value=""
                                                                     placeholder="First Name" data-invmsg="Phone is invalid" />
                                                             </div>
-                                                            <div id = "frm_field_20_container" class="col-md-5 frm_form_field form-field  frm_none_container">
+                                                            <div id = "frm_field_20_container" class="col-md-3 frm_form_field form-field  frm_none_container">
                                                                 <input required type="text" id="field_rposy" name="last_name" value=""
                                                                     placeholder="Last Name" data-invmsg="Phone is invalid" />
                                                             </div>

@@ -21,7 +21,7 @@ class Slider(BaseModel):
     
 class Service(BaseModel):
     title = models.CharField(max_length = 100)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
 
 
     def __str__(self) -> str:
@@ -75,7 +75,10 @@ class Project(BaseModel):
 class ProjectImage(BaseModel):
     project = models.ForeignKey(Project, on_delete = models.CASCADE)
     project_image = models.ImageField(upload_to="project_images/")
-    
+    is_project_last_image = models.BooleanField(default = False)
+    project_short_des = models.TextField(blank = True, null = True, help_text='Fill this field if is project last image is checked!',)
+
+
     def __str__(self) -> str:
         return self.project.title
 
@@ -106,9 +109,10 @@ class AboutUs(models.Model):
     def __str__(self) -> str:
         return self.heading
     
-class TeamMember(models.Model):
+class TeamMember(BaseModel):
     name = models.CharField(max_length = 50)
     image = models.ImageField(upload_to="team_members/")
+    social_profile = models.CharField(max_length = 50, blank=True, null=True)
     designation = models.CharField(max_length = 50)
 
 

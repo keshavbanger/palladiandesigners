@@ -7,7 +7,7 @@ from django.conf import settings
 
 # Create your views here.
 def careers_page(request):
-    careers = CurrentOpenning.objects.filter(is_active = True).order_by("-created_at")
+    careers = CurrentOpenning.objects.filter(is_active = True).order_by("created_at")
     context = {
         "careers": careers
     }
@@ -16,7 +16,7 @@ def careers_page(request):
 def send_mail_to_admin(first_name, last_name, email, phone_number, position_name):
     html_content = render_to_string('static/emails/candidate_applied.html', {'first_name': first_name, 'last_name':last_name, 'email': email, "mobile_no": phone_number, 'position_name': position_name})
     text_content = strip_tags(html_content)
-    admin_email = "harshit.s@goldeneagle.ai"
+    admin_email = "services@palladiandesigners.com"
     # admin_email = "services@palladiandesigners.com"
     msg = EmailMultiAlternatives(
         'Candidate Applied - Palladian Designers',
@@ -38,6 +38,7 @@ def job_detail(request, career_id):
         job_candidate_detail = JobOpeningDetail.objects.get(id = job_career_detail)
         first_name = request.POST.get("first_name")
         candidate_resume = request.FILES["candidate_resume"]
+        candidate_portfolio = request.FILES["candidate_portfolio"]
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
         phone_number = request.POST.get("phone_number")
@@ -50,6 +51,7 @@ def job_detail(request, career_id):
             candidate = AppliedCandidateProfile(
                 job_detail=job_candidate_detail,
                 candidate_resume=candidate_resume,
+                candidate_portfolio=candidate_portfolio,
                 first_name=first_name,
                 last_name=last_name,
                 email=email,

@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-09)@tkqkk&@5p#k^4ql9een2(^w@akgo#%-=nyeu^e(80*q@ol
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -92,7 +92,9 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+# palladianuser
+# palladianadmin
+# Shivam@palladian@admin123
 
 
 # Password validation
@@ -152,12 +154,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
 
 RECAPTCHA_PUBLIC_KEY = '6LfkJXcpAAAAAAbihI1rjFsUd40GLoRXl4pvQ0M5'
 RECAPTCHA_PRIVATE_KEY = '6LfkJXcpAAAAABxiG_bq5YiztWw906MTDYjv2uGD'
