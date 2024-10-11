@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import sentry_sdk
 from dotenv import load_dotenv
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-09)@tkqkk&@5p#k^4ql9een2(^w@akgo#%-=nyeu^e(80*q@ol
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -43,7 +44,6 @@ INSTALLED_APPS = [
     'django_ckeditor_5',
     "debug_toolbar",
     "careers",
-    "django_recaptcha",
     "fontawesome_free",
 ]
 
@@ -92,7 +92,9 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+# palladianuser
+# palladianadmin
+# Shivam@palladian@admin123
 
 
 # Password validation
@@ -153,14 +155,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
-
-RECAPTCHA_PUBLIC_KEY = '6LfkJXcpAAAAAAbihI1rjFsUd40GLoRXl4pvQ0M5'
-RECAPTCHA_PRIVATE_KEY = '6LfkJXcpAAAAABxiG_bq5YiztWw906MTDYjv2uGD'
 
 
 customColorPalette = [
@@ -252,3 +246,13 @@ CKEDITOR_5_CONFIGS = {
         }
     }
 }
+sentry_sdk.init(
+    dsn="https://e6abdd65850eb9863f35273318e5c0f4@o4507333137137664.ingest.us.sentry.io/4507333138644992",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)

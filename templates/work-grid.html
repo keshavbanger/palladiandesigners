@@ -5,10 +5,55 @@ Palladian Designers | Projects
 {% load static %}
 {% block content %}
     <!--MAIN BODY-->
+    <div class="row-fluid row-no-padding margin-lg-90t margin-xs-15t">
+        <div class="no-padd col-sm-12 ">
+            <div class="column-inner ">
+                <div class="prague-shortcode-parent ">
+                    <div class="prague-shortcode-parent-img">
+                        <span class="overlay"></span>
+                        <img src="{% static 'img/onepage-home/projects_page.jpg' %}" data-lazy-src="{% static 'img/onepage-home/projects_page.jpg' %}" class="s-img-switch"
+                            alt="middle-banner image" />
+                    </div>
+
+                    <div class="prague-shortcode-content-wrapp">
+                        <div class="prague-shortcode-heading  light left">
+                            <div class="parent-subtitle">Projects</div>
+
+                            <h2 class="parent-title">This is what We do.</h2>
+                        </div>
+
+                        <div data-unique-key="0bf3c8aa9017e52dd041b7e2c3327621" class="js-load-more" data-start-page="1"
+                            data-max-page="2" data-next-link="onepage-home.html">
+                            <div class="row prague_services prague_count_col3 prague_gap_col15  no-footer-content prague-load-wrapper"
+                                data-columns="prague_count_col3" data-gap="prague_gap_col15">
+                                {% for project in project_cat %}
+                                    <div class="portfolio-item-wrapp prague_filter_class">
+                                        <div class="portfolio-item">
+                                            <div class="prague-services-wrapper">
+                                                <span class="services-item-icon icon-circle-compass"></span>
+                                                <h3 class="services-item-title">{{project.title}}</h3>
+                                                <a href="{% url 'project-cat' project.id %}" class="prague-services-link a-btn-2 creative"
+                                                    target="_self">
+                                                    <span class="a-btn-line"></span>
+                                                    Projects </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container no-padd margin-lg-145t margin-lg-145b margin-sm-100t margin-sm-70b">
         <div class="row-fluid  ">
             <div class="col-sm-12 no-padd">
-                <div data-unique-key="d30797fabd788147235e48099dfaacc0" class="js-load-more" data-start-page="1"
+                <div style="display:none;" data-unique-key="d30797fabd788147235e48099dfaacc0" class="js-load-more" data-start-page="1"
                     data-max-page="3" data-next-link="work-grid/page/2.html">
                     <div class="row prague_grid prague_count_col3 prague_gap_col15 js-load-more-block no-footer-content prague-load-wrapper"
                         data-columns="prague_count_col3" data-gap="prague_gap_col15">

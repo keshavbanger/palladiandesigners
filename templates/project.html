@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}
+Palladian Designers | Projects
+{% endblock title %}
+{% load static %}
+{% block content %}
+    <!--MAIN BODY-->
+    <div class="container no-padd margin-lg-145t margin-lg-145b margin-sm-100t margin-sm-70b">
+        <div class="row-fluid  ">
+            <div class="col-sm-12 no-padd">
+                <div data-unique-key="d30797fabd788147235e48099dfaacc0" class="js-load-more" data-start-page="1"
+                    data-max-page="3" data-next-link="work-grid/page/2.html">
+                    <div class="row prague_grid prague_count_col3 prague_gap_col15 js-load-more-block no-footer-content prague-load-wrapper"
+                        data-columns="prague_count_col3" data-gap="prague_gap_col15">
+                        {% if project_cat %}
+                        {% for proj in project_cat %}
+                            <div class="portfolio-item-wrapp portfolio-item-paralax js-filter-simple-block p_f_d7a8462 p_f_ddba60a p_f_aebfe46 ">
+                                <div class="portfolio-item">
+                                    <div class="project-grid-wrapper">
+                                        <a class="project-grid-item-img-link" href="{% url 'project-details' proj.slug %}" target="_self">
+                                            <div class="project-grid-item-img">
+                                                <img src="/media/{{proj.project_banner_image}}"
+                                                    class="s-img-switch wp-post-image" alt="seascape-villa image" />
+                                            </div>
+                                        </a>
+                                        <div class="project-grid-item-content">
+                                            <h4 class="project-grid-item-title"><a href="{% url 'project-details' proj.slug %}" target="_self">{{proj.title}}</a></h4>
+                                            <div class="project-grid-item-category">{{proj.project_category}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="project-detail-simple">
+
+                            <div class="container-fluid top-banner no-padd simple dark vindow-height no-padd">
+                                <div class="content">
+                    
+                                    <div class="subtitle">
+                                        OOPS </div>
+                    
+                                    <h1 class="title">No Project Found</h1>
+                                    <div class="description">
+                                        <p>Please check another category to view projects.</p>
+                                    </div>
+                    
+                                </div>
+                            </div>
+                    
+                            <div class="container no-padd ">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="project-detail-block-outer">
+                                            <div class="project-detail-block-wrapper">
+                                                
+                                            </div>
+                    
+                                            
+                    
+                    
+                        
+                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% comment %} <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <button class="load-btn a-btn-2 creative js-load-more-btn">
+                                <span class="a-btn-line load"></span>
+                                LOAD MORE </button>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/MAIN BODY-->
+{% endblock content %}

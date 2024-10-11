@@ -11,7 +11,7 @@
       <div class="container-fluid top-banner no-padd simple fullheight light">
         <span class="overlay"></span>
         <img
-          src="{% static 'img/about-us/AdobeStock_101771536.jpg' %}"
+          src="{% static 'img/about-us/IMG_1139.JPEG' %}"
           class="s-img-switch"
           alt="banner image"
         />
@@ -67,7 +67,7 @@
                       text-anchor="middle"
                       alignment-baseline="middle"
                     >
-                      157
+                      1000+
                     </text>
                     <text
                       class="count title"
@@ -109,7 +109,7 @@
                       text-anchor="middle"
                       alignment-baseline="middle"
                     >
-                      86
+                      100+
                     </text>
                     <text
                       class="count title"
@@ -270,18 +270,19 @@
         <div class="team-wrapper no-figure">
           <div class="trans_figures enable_anima"></div>
 
-          <div class="team-outer" style="height: 380px">
+          <a target="__blank" href="{{member.social_profile}}"><div class="team-outer" style="height: 380px; border-radius: 50%;">
             <img
               src="/media/{{member.image}}"
               data-lazy-src="/media/{{member.image}}"
               alt="Marry picture"
               class="prague-team-img s-img-switch"
             />
-          </div>
+          </div></a>
 
           <div class="position">{{member.designation}}</div>
           <div class="name">
-            <a target="__blank" href="{{member.social_profile}}"><h3>{{member.name}}</h3></a>
+            <a style="text-align: center;" target="__blank" href="{{member.social_profile}}"><h3>{{member.name}}</h3></a>
+            <a style="text-align: center;" target="__blank"><h3 style="font-size: 19px !important; margin-top: 3px !important;">{{member.designation}}</h3></a>
           </div>
         </div>
       </div>

@@ -7,25 +7,75 @@ from django.conf import settings
 
 # Create your views here.
 def careers_page(request):
-    careers = CurrentOpenning.objects.filter(is_active = True).order_by("-created_at")
+    careers = CurrentOpenning.objects.filter(is_active = True).order_by("created_at")
     context = {
         "careers": careers
     }
     return render(request, "careers_page.html", context)
 
-def send_mail_to_admin(first_name, last_name, email, phone_number, position_name):
-    html_content = render_to_string('static/emails/candidate_applied.html', {'first_name': first_name, 'last_name':last_name, 'email': email, "mobile_no": phone_number, 'position_name': position_name})
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
+def send_mail_to_admin(
+        first_name, 
+        last_name, 
+        email, 
+        phone_number, 
+        position_name, 
+        candidate_resume, 
+        current_ctc, 
+        expected_ctc, 
+        notice_period,
+        candidate_portfolio=None,
+    ):
+    # Render HTML content from a template
+    html_content = render_to_string(
+        'static/emails/candidate_applied.html', 
+        {
+            'first_name': first_name,
+            'last_name': last_name,
+            'email': email,
+            "mobile_no": phone_number,
+            'position_name': position_name,
+            "current_ctc": current_ctc,
+            "expected_ctc": expected_ctc,
+            "notice_period": notice_period
+        }
+    )
     text_content = strip_tags(html_content)
-    admin_email = "harshit.s@goldeneagle.ai"
-    # admin_email = "services@palladiandesigners.com"
+    admin_email = "shivamsdixit23@gmail.com"
+    # admin_email = "harshitshreshthi4@gmail.com"
+    cc_emails = ["aman.palladian@gmail.com", "vaishnavi.palladian@gmail.com", "harsh.palladian@gmail.com"]
     msg = EmailMultiAlternatives(
         'Candidate Applied - Palladian Designers',
         text_content,
-        settings.DEFAULT_FROM_EMAIL,
-        [admin_email]
+        settings.DEFAULT_FROM_EMAIL,  # Sender's email (from settings)
+        [admin_email],  # Recipient email
+        cc=cc_emails
     )
     msg.attach_alternative(html_content, "text/html")
+    if candidate_resume:
+        try:
+            # Ensure the file is read in binary mode
+            candidate_resume.open('rb')
+            msg.attach(candidate_resume.name, candidate_resume.read(), 'application/pdf')
+        except Exception as e:
+            print(f"Error attaching resume: {e}")
+        finally:
+            candidate_resume.close()
+    if candidate_portfolio:
+        try:
+            # Ensure the file is read in binary mode
+            candidate_portfolio.open('rb')
+            msg.attach(candidate_portfolio.name, candidate_portfolio.read(), 'application/pdf')
+        except Exception as e:
+            print(f"Error attaching resume: {e}")
+        finally:
+            candidate_resume.close()
     msg.send(fail_silently=False)
+
 
 def job_detail(request, career_id):
     is_successful_applied = False
@@ -34,11 +84,7 @@ def job_detail(request, career_id):
         job_career_detail = request.POST.get("job_career_detail")
         job_candidate_detail = JobOpeningDetail.objects.get(id=job_career_detail)
         # Rest of your code remains unchanged
-        job_career_detail = request.POST.get("job_career_detail")
-        job_candidate_detail = JobOpeningDetail.objects.get(id = job_career_detail)
         first_name = request.POST.get("first_name")
-        candidate_resume = request.FILES["candidate_resume"]
-        candidate_portfolio = request.FILES["candidate_portfolio"]
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
         phone_number = request.POST.get("phone_number")
@@ -47,6 +93,17 @@ def job_detail(request, career_id):
         current_ctc = request.POST.get("current_ctc")
         expected_ctc = request.POST.get("expected_ctc")
         position_name = request.POST.get("position_name")
+        # Check if 'candidate_portfolio' exists in request.FILES
+        if 'candidate_portfolio' in request.FILES:
+            candidate_portfolio = request.FILES["candidate_portfolio"]
+        else:
+            candidate_portfolio = None  # or any default value you prefer
+
+        # Check if 'candidate_resume' exists in request.FILES
+        if 'candidate_resume' in request.FILES:
+            candidate_resume = request.FILES["candidate_resume"]
+        else:
+            candidate_resume = None 
         try:
             candidate = AppliedCandidateProfile(
                 job_detail=job_candidate_detail,
@@ -64,7 +121,7 @@ def job_detail(request, career_id):
             candidate.save()
             print("Candidate Applied Successfully!")
             is_successful_applied = True
-            send_mail_to_admin(first_name, last_name, email, phone_number, position_name)
+            send_mail_to_admin(first_name, last_name, email, phone_number, position_name, candidate_resume, candidate_portfolio, current_ctc, expected_ctc, notice_period)
         except Exception as e:
             context = {
                 "is_applied_before": True,
