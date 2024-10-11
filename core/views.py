@@ -9,7 +9,7 @@ from django.db.models import Q
 
 def index(request):
     slider_img = Slider.objects.filter(is_visible = True).last()
-    projects = Project.objects.all().order_by("-year")
+    projects = Project.objects.filter(is_featured=True).order_by("-year")
     testimonials = ClientReview.objects.all().order_by('-created_at')
     about = AboutUs.objects.all().first()
     top_clients = ClientPage.objects.all()[0:4]
@@ -51,6 +51,7 @@ def projects(request):
         projects = Project.objects.filter(project_category__in=project_cat_inside)
 
         context["projects"] = projects
+        context["project_cat"] = project_cat
 
     return render(request, 'work-grid.html', context)
 
@@ -73,6 +74,7 @@ def project_detail_view(request, slug):
         "project_cat": project_cat.upper(),
         "title": title,
         "project": project,
+        "header_dark": "dark",
         "project_image_desc": project_image_desc,
         "total_image": len(project_images)
     }
@@ -111,7 +113,7 @@ def send_mail_admin(name, email, mobile_no, message):
     html_content = render_to_string('static/emails/contact_email.html', {'name': name, 'email': email, "mobile_no": mobile_no, 'message': message})
     text_content = strip_tags(html_content)
     # admin_email = "harshit.s@goldeneagle.ai"
-    admin_email = "services@palladiandesigners.com"
+    admin_email = "shivamsdixit23@gmail.com"
     msg = EmailMultiAlternatives(
         'User Contact Query Message',
         text_content,
@@ -149,3 +151,10 @@ def service_detail(request, id):
     }
     return render(request, 'services_details.html', context)
 
+def project_view(request, cat_id):
+    projects = Project.objects.filter(project_category__id = cat_id)
+    context = {
+        "project_cat": projects,
+        "header_dark": True,
+    }
+    return render(request, 'project.html', context)

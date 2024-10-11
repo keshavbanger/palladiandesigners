@@ -2,7 +2,7 @@ from typing import Iterable
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 from django.utils.text import slugify
-
+from django_resized import ResizedImageField
 
 
 class BaseModel(models.Model):
@@ -13,7 +13,7 @@ class BaseModel(models.Model):
         abstract = True
 
 class Slider(BaseModel):
-    slider_image = models.ImageField(upload_to="slider_images/")
+    slider_image = ResizedImageField(force_format="WEBP", quality=75, upload_to="slider_images/")
     is_visible = models.BooleanField(default = True)
 
     def __str__(self) -> str:
@@ -39,7 +39,7 @@ class ServiceDetail(BaseModel):
 
 class ProjectCategory(BaseModel):
     title = models.CharField(max_length = 100)
-
+    
     def __str__(self) -> str:
         return self.title
 
@@ -47,12 +47,13 @@ class ProjectCategory(BaseModel):
         ordering = ("title",)
     
 class Project(BaseModel):
-    project_category = models.ForeignKey(ProjectCategory, on_delete = models.CASCADE)
+    project_category = models.ForeignKey(ProjectCategory, on_delete = models.CASCADE, related_name="project_cat")
     title = models.CharField(max_length = 100)
     slug = models.SlugField(unique=True, blank=True)
+    is_featured = models.BooleanField(default=False)
     year = models.IntegerField()
     description = models.TextField()
-    project_banner_image = models.ImageField(upload_to="project_images/")
+    project_banner_image = ResizedImageField(force_format="WEBP", quality=75, upload_to="project_images/")
 
     def save(self, *args, **kwargs):
         # Generate a slug if it doesn't exist
@@ -74,7 +75,8 @@ class Project(BaseModel):
     
 class ProjectImage(BaseModel):
     project = models.ForeignKey(Project, on_delete = models.CASCADE)
-    project_image = models.ImageField(upload_to="project_images/")
+    project_image = ResizedImageField(force_format="WEBP", quality=75, upload_to="project_images/")
+
     is_project_last_image = models.BooleanField(default = False)
     project_short_des = models.TextField(blank = True, null = True, help_text='Fill this field if is project last image is checked!',)
 
@@ -111,7 +113,7 @@ class AboutUs(models.Model):
     
 class TeamMember(BaseModel):
     name = models.CharField(max_length = 50)
-    image = models.ImageField(upload_to="team_members/")
+    image = ResizedImageField(force_format="WEBP", quality=75, upload_to="team_members/")
     social_profile = models.CharField(max_length = 50, blank=True, null=True)
     designation = models.CharField(max_length = 50)
 
@@ -137,7 +139,7 @@ class PricingPlan(BaseModel):
         return self.project_category.title
     
 class ClientPage(BaseModel):
-    client_logo = models.ImageField(upload_to="clients_images/")
+    client_logo = ResizedImageField(force_format="WEBP", quality=75, upload_to="clients_images/")
     client_name = models.CharField(max_length = 50)
     client_site = models.CharField(max_length = 50)
 

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,47 +20,131 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            max-width: 150px;
+            margin-bottom: 10px;
         }
 
         h1 {
             color: #333;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         p {
             color: #555;
+            line-height: 1.6;
         }
 
-        .user-query {
-            background-color: #f9f9f9;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
             padding: 10px;
-            margin-top: 15px;
-            border-radius: 4px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        td {
+            color: #555;
         }
 
         .footer {
             margin-top: 20px;
             text-align: center;
             color: #777;
+            font-size: 14px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Job Application Received - Palladian Designers</h1>
-        <p>Hello Shivam,</p>
-        <p>Candidate Applied for a Job for the Position of <b>{{position_name}}</b></p>
-
-        <div class="user-query">
-            <p><strong>Candidate Name:</strong> {{first_name}} {{last_name}}</p>
-            <p><strong>Mobile No:</strong> {{mobile_no}}</p>
-            <p><strong>Email:</strong> {{email}}</p>
-            <p><strong>Job Role:</strong> {{position_name}}</p>
+        <!-- Header with logo -->
+        <div class="header">
+            <img src="https://palladiandesigners.com/static/img/home/palladium.png" alt="Company Logo"> <!-- Replace with your logo URL -->
         </div>
 
-        <p>Please respond to the user's query as soon as possible.</p>
+        <h1>Job Application Received - Palladian Designers</h1>
+        <p>Hello Shivam,</p>
+        <p>A candidate has applied for the position of <b>{{position_name}}</b>. Below are the details:</p>
 
+        <!-- Candidate details in table format -->
+        <table>
+            <tr>
+                <th>Candidate Name</th>
+                <td>{{first_name}} {{last_name}}</td>
+            </tr>
+            <tr>
+                <th>Mobile No</th>
+                <td>{{mobile_no}}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{email}}</td>
+            </tr>
+            <tr>
+                <th>Job Role</th>
+                <td>{{position_name}}</td>
+            </tr>
+            <tr>
+                <th>Current CTC</th>
+                <td>{{current_ctc}}</td>
+            </tr>
+            <tr>
+                <th>Expected CTC</th>
+                <td>{{expected_ctc}}</td>
+            </tr>
+            <tr>
+                <th>Notice Period</th>
+                <td>{{notice_period}}</td>
+            </tr>
+        </table>
+
+        <!-- Call to action button -->
+        <p style="text-align: center;">
+            <a href="https://palladiandesigners.com/admin/careers/appliedcandidateprofile/" class="btn">View Application</a> <!-- Add the link to view applications -->
+        </p>
+
+        <!-- Footer -->
         <div class="footer">
-            <p>Thank you</p>
+            <p>Thank you,<br>Palladian Designers HR Team</p>
+            <p>Contact us: <a href="mailto:hr@palladiandesigners.com">hr@palladiandesigners.com</a></p>
         </div>
     </div>
 </body>
