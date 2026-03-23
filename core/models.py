@@ -72,6 +72,14 @@ class Project(BaseModel):
 
     def __str__(self) -> str:
         return self.title
+
+class Walkthrough(BaseModel):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    video_url = models.URLField()
+
+
+    def __str__(self) -> str:
+        return self.project.title
     
 class ProjectImage(BaseModel):
     project = models.ForeignKey(Project, on_delete = models.CASCADE)

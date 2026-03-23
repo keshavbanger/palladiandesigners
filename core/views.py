@@ -1,5 +1,19 @@
 from django.shortcuts import render, redirect
-from core.models import Slider, Project, ClientReview, AboutUs, TeamMember, ProjectCategory, ProjectImage, Service, ContactForm, PricingPlan, ClientPage, ServiceDetail
+from core.models import (
+    Slider, 
+    Project, 
+    ClientReview, 
+    AboutUs, 
+    TeamMember, 
+    ProjectCategory, 
+    ProjectImage, 
+    Service, 
+    ContactForm, 
+    PricingPlan, 
+    ClientPage, 
+    ServiceDetail,
+    Walkthrough
+)
 from django.shortcuts import get_object_or_404
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -57,6 +71,7 @@ def projects(request):
 
 def project_detail_view(request, slug):
     project = get_object_or_404(Project, slug=slug)
+    walk_through = Walkthrough.objects.filter(project=project)
     project_cat = project.project_category.title
     title = project.title
     project_images = ProjectImage.objects.filter(project=project).select_related('project')
@@ -76,7 +91,8 @@ def project_detail_view(request, slug):
         "project": project,
         "header_dark": "dark",
         "project_image_desc": project_image_desc,
-        "total_image": len(project_images)
+        "total_image": len(project_images),
+        "videos": walk_through,
     }
     return render(request, 'project_details.html', context)
 
