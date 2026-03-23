@@ -6,7 +6,7 @@
                 {% if header_dark %}
                 <img src="{% static 'img/home/pd_dark1.jpeg' %}" style="width: 90px;" class="image_logo" alt="logo" />
                 {% else %}
-                <img src="{% static 'img/home/palladium.png' %}" style="width: 90px;" class="image_logo" alt="logo" />
+                <img src="{% static 'img/home/palladian_1.png' %}" style="width: 90px;" class="image_logo" alt="logo" />
                 {% endif %}
             </a>
         </div>
@@ -66,13 +66,7 @@
                                                 Slider</a></li>
                                     </ul> {% endcomment %}
                                 </li>
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-                                <a href="{% url 'projects' %}">Projects</a>
-                                {% comment %} <ul class="sub-menu">
-                                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{% url 'pricing-plan' %}">Pricing Plan</a></li>
-                                    </ul> {% endcomment %}
-                                </li>
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{% url 'pricing-plan' %}">Pricing Plan</a></li>
+                                {% comment %} <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{% url 'pricing-plan' %}">Pricing Plan</a></li> {% endcomment %}
                                 {% comment %} <li class="menu-item menu-item-type-custom menu-item-object-custom curemenu-item-has-children"><a
                                         href="#">Pages</a>
                                     <ul class="sub-menu">
@@ -191,21 +185,27 @@
                                                 Details</a></li>
                                     </ul>
                                 </li> {% endcomment %}
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
+                                {% comment %} <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
                                 <a href="{% url 'services' %}">Services</a>
-                                </li>
+                                </li> {% endcomment %}
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
                                 <a href="{% url 'about' %}">About Us</a>
                                 </li>
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
+                                <a href="{% url 'projects' %}">Projects</a>
+                                {% comment %} <ul class="sub-menu">
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{% url 'pricing-plan' %}">Pricing Plan</a></li>
+                                    </ul> {% endcomment %}
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
                                 <a href="{% url 'contactus' %}">Contact Us</a>
                                 </li>
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
+                                {% comment %} <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
                                 <a href="{% url 'clients' %}">Our Associates</a>
-                                </li>
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
+                                </li> {% endcomment %}
+                                {% comment %} <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
                                 <a href="{% url 'careers_page' %}">Careers</a>
-                                </li>
+                                </li> {% endcomment %}
                             </ul>
                         </nav>
                     </div>

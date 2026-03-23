@@ -13,11 +13,6 @@ def careers_page(request):
     }
     return render(request, "careers_page.html", context)
 
-from django.core.mail import EmailMultiAlternatives
-from django.conf import settings
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-
 def send_mail_to_admin(
         first_name, 
         last_name, 
@@ -47,7 +42,7 @@ def send_mail_to_admin(
     text_content = strip_tags(html_content)
     admin_email = "shivamsdixit23@gmail.com"
     # admin_email = "harshitshreshthi4@gmail.com"
-    cc_emails = ["aman.palladian@gmail.com", "vaishnavi.palladian@gmail.com", "harsh.palladian@gmail.com"]
+    cc_emails = ["hr@palladiandesigners.com"]
     msg = EmailMultiAlternatives(
         'Candidate Applied - Palladian Designers',
         text_content,

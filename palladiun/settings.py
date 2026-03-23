@@ -246,13 +246,13 @@ CKEDITOR_5_CONFIGS = {
         }
     }
 }
-sentry_sdk.init(
-    dsn="https://e6abdd65850eb9863f35273318e5c0f4@o4507333137137664.ingest.us.sentry.io/4507333138644992",
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    traces_sample_rate=1.0,
-    # Set profiles_sample_rate to 1.0 to profile 100%
-    # of sampled transactions.
-    # We recommend adjusting this value in production.
-    profiles_sample_rate=1.0,
-)
+# sentry_sdk.init(
+#     dsn="https://e6abdd65850eb9863f35273318e5c0f4@o4507333137137664.ingest.us.sentry.io/4507333138644992",
+#     # Set traces_sample_rate to 1.0 to capture 100%
+#     # of transactions for performance monitoring.
+#     traces_sample_rate=1.0,
+#     # Set profiles_sample_rate to 1.0 to profile 100%
+#     # of sampled transactions.
+#     # We recommend adjusting this value in production.
+#     profiles_sample_rate=1.0,
+# )
