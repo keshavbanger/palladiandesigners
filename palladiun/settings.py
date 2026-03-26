@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-09)@tkqkk&@5p#k^4ql9een2(^w@akgo#%-=nyeu^e(80*q@ol'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG")
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -83,7 +83,8 @@ WSGI_APPLICATION = 'palladiun.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if os.getenv("USE_SQLITE", "False") == "True":
+# Use SQLite if set, OR if we're on a dev machine without a defined Postgres DB info
+if os.getenv("USE_SQLITE", "False").lower() == "true" or not os.getenv("DB_NAME"):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -97,8 +98,8 @@ else:
             'NAME': os.getenv("DB_NAME"),
             'USER': os.getenv("DB_USER"),
             'PASSWORD': os.getenv("DB_PASSWORD"),
-            'HOST': os.getenv("DB_HOST"),
-            'PORT': '5432',
+            'HOST': os.getenv("DB_HOST", "localhost"),
+            'PORT': os.getenv("DB_PORT", "5432"),
         }
     }
 # palladianuser
