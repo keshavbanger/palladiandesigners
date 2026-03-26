@@ -542,29 +542,133 @@
 </div>
 
 <!-- 6. TESTIMONIALS -->
-<div class="heading left dark container" style="margin-top:80px;">
-    <div class="subtitle">Client Reviews</div>
-    <h2 class="title">They love us.</h2>
-</div>
-<div class="container" style="margin-top:30px; margin-bottom:80px;">
-    <div class="row">
-        {% for client_review in testimonials %}
-        <div class="col-sm-6 col-md-4" style="margin-bottom:30px;">
-            <div style="background:#f9f9f9; padding:30px 28px; height:100%; position:relative;">
-                <span style="font-size:40px; color:#ddd; line-height:1; display:block; margin-bottom:10px;">&ldquo;</span>
-                <blockquote style="border:none; padding:0; margin:0 0 20px 0; font-size:14px; color:#444; line-height:1.8; font-style:italic;">
-                    {{ client_review.feedback }}
-                </blockquote>
-                <h4 style="font-size:13px; font-weight:700; letter-spacing:2px; color:#111; margin:0 0 4px 0; text-transform:uppercase;">{{ client_review.client_name }}</h4>
-                <span style="font-size:11px; color:#999; letter-spacing:1px;">
-                    {% if "yamini" in client_review.client_name|lower %}Interior Design Client
-                    {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
-                    {% elif "girraj" in client_review.client_name|lower %}Residential Project
-                    {% else %}Satisfied Client{% endif %}
-                </span>
-            </div>
+<style>
+    .testimonials-section {
+        margin-top: 150px;
+        margin-bottom: 120px;
+        overflow: hidden;
+        background: #fff;
+    }
+    .testimonials-heading {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    .marquee-container {
+        display: flex;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        /* Fade edges */
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+    }
+    .marquee-content {
+        display: flex;
+        flex-shrink: 0;
+        animation: marquee 30s linear infinite;
+    }
+    .marquee-container:hover .marquee-content {
+        animation-play-state: paused;
+    }
+    .testimonial-card {
+        width: 420px;
+        flex-shrink: 0;
+        background: #fcfcfc;
+        padding: 40px 35px;
+        margin: 0 15px;
+        border: 1px solid #f0f0f0;
+        border-radius: 8px;
+        white-space: normal;
+        position: relative;
+        text-align: left;
+    }
+    .testimonial-quote-mark {
+        font-size: 70px;
+        color: var(--gold);
+        opacity: 0.15;
+        line-height: 1;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-family: 'Playfair Display', serif;
+    }
+    .testimonial-text {
+        font-size: 15px;
+        color: #555;
+        line-height: 1.8;
+        font-style: italic;
+        margin: 15px 0 25px 0;
+        position: relative;
+        z-index: 1;
+    }
+    .testimonial-author {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #111;
+        margin: 0 0 5px 0;
+        text-transform: uppercase;
+    }
+    .testimonial-role {
+        font-size: 11px;
+        color: #999;
+        letter-spacing: 1px;
+    }
+
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); } 
+    }
+    
+    @media (max-width: 768px) {
+        .testimonials-section { margin-top: 100px; margin-bottom: 80px; }
+        .testimonial-card { width: 320px; padding: 30px 25px; }
+    }
+</style>
+
+<div class="testimonials-section">
+    <div class="container testimonials-heading heading dark">
+        <div class="subtitle" style="text-align:center;">Client Reviews</div>
+        <h2 class="title" style="text-align:center; width:100%;">What They Say.</h2>
+    </div>
+
+    <div class="marquee-container">
+        <!-- Group 1 -->
+        <div class="marquee-content">
+            {% for _ in "12" %}
+                {% for client_review in testimonials %}
+                <div class="testimonial-card">
+                    <span class="testimonial-quote-mark">&ldquo;</span>
+                    <p class="testimonial-text">{{ client_review.feedback }}</p>
+                    <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
+                    <div class="testimonial-role">
+                        {% if "yamini" in client_review.client_name|lower %}Interior Design Client
+                        {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
+                        {% elif "girraj" in client_review.client_name|lower %}Residential Project
+                        {% else %}Satisfied Client{% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% endfor %}
         </div>
-        {% endfor %}
+        <!-- Group 2 for seamless looping -->
+        <div class="marquee-content" aria-hidden="true">
+            {% for _ in "12" %}
+                {% for client_review in testimonials %}
+                <div class="testimonial-card">
+                    <span class="testimonial-quote-mark">&ldquo;</span>
+                    <p class="testimonial-text">{{ client_review.feedback }}</p>
+                    <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
+                    <div class="testimonial-role">
+                        {% if "yamini" in client_review.client_name|lower %}Interior Design Client
+                        {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
+                        {% elif "girraj" in client_review.client_name|lower %}Residential Project
+                        {% else %}Satisfied Client{% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 
