@@ -285,32 +285,46 @@
   </div>
 </div>
 
-<!-- TEAM SECTION -->
-<div class="container" style="padding: 80px 0 60px 0;">
-    <div style="margin-bottom: 50px;">
-        <div style="font-size: 11px; letter-spacing: 2px; color: var(--gold, #c5a059); text-transform: uppercase; font-weight: 700; margin-bottom: 15px;">TEAM</div>
-        <h2 style="font-size: 40px; font-weight: 700; color: #111; margin: 0;">Experts ready to serve.</h2>
+<div class="container no-padd">
+  <div class="row-fluid margin-lg-15t margin-sm-20t">
+    <div class="col-sm-12 no-padd-md">
+      <div class="heading left dark">
+        <div class="subtitle">TEAM</div>
+        <h2 class="title">Experts ready to serve.</h2>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="row" style="display: flex; flex-wrap: wrap; justify-content: flex-start; row-gap: 50px;">
-        {% for member in team_members %}
-        <div class="col-md-4 col-sm-6 col-xs-12" style="text-align: center;">
-            <a href="{{ member.social_profile|default:'#' }}" target="_blank" style="text-decoration: none; display: block; group">
-                <div style="width: 280px; height: 280px; margin: 0 auto 25px auto; border-radius: 50%; overflow: hidden; background-color: #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-                    <img 
-                        src="/media/{{ member.image }}" 
-                        alt="{{ member.name }}" 
-                        style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;"
-                        onmouseover="this.style.filter='grayscale(0%)'"
-                        onmouseout="this.style.filter='grayscale(100%)'"
-                    />
-                </div>
-                <h3 style="font-size: 22px; font-weight: 700; color: #111; margin: 0 0 8px 0; letter-spacing: -0.5px;">{{ member.name }}</h3>
-                <h4 style="font-size: 13px; font-weight: 700; color: #333; text-transform: uppercase; letter-spacing: 1px; margin: 0;">{{ member.designation }}</h4>
-            </a>
+<div class="container no-padd margin-lg-60b">
+  <div class="row-fluid margin-lg-35t margin-sm-20t">
+    {% for member in team_members %}
+    <div class="col-sm-6 col-lg-4 col-md-4 col-xs-12 no-padd-left" style="margin-bottom: 50px;">
+      <div class="column-inner">
+        <div class="team-wrapper no-figure">
+          <div class="trans_figures enable_anima"></div>
+
+          <a target="__blank" href="{{member.social_profile}}">
+            <div class="team-outer" style="width: 250px; height: 250px; margin: 0 auto 20px auto; border-radius: 50%; overflow: hidden;">
+              <img
+                src="/media/{{member.image}}"
+                data-lazy-src="/media/{{member.image}}"
+                alt="{{member.name}}"
+                class="prague-team-img s-img-switch"
+                style="width: 100%; height: 100%; object-fit: cover; object-position: top center;"
+              />
+            </div>
+          </a>
+
+          <div class="name" style="text-align: center;">
+            <a target="__blank" href="{{member.social_profile}}"><h3 style="font-size: 22px !important; color: #111; margin-bottom: 5px !important; font-weight: 700;">{{member.name}}</h3></a>
+            <h3 style="font-size: 14px !important; margin-top: 0 !important; color: #333; font-weight: 700;">{{member.designation}}</h3>
+          </div>
         </div>
-        {% endfor %}
+      </div>
     </div>
+    {% endfor %}
+  </div>
 </div>
 
 <div class="container margin-lg-140b">
