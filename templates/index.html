@@ -542,96 +542,78 @@
 </div>
 
 <!-- 6. TESTIMONIALS -->
-<div style="background-color: #f7f7f7; padding: 120px 0; margin-top: 140px; overflow: hidden;">
+<div style="background-color: #f7f7f7; padding: 120px 0; margin-top: 150px;">
     <div class="container" style="text-align: center; margin-bottom: 50px;">
         <div style="color: #c5a059; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">Client Reviews</div>
         <h2 style="font-size: 40px; color: #111; margin-top: 10px;">What They Say.</h2>
     </div>
 
-    <style>
-        .t-marquee-wrap {
-            display: flex;
-            width: max-content;
-            animation: scroller 35s linear infinite;
-        }
-        .t-marquee-wrap:hover {
-            animation-play-state: paused;
-        }
-        .t-card {
-            width: 400px;
-            background: #fff;
-            padding: 40px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.04);
-            border-radius: 8px;
-            margin: 0 15px;
-            flex-shrink: 0;
-            text-align: left;
-        }
-        @keyframes scroller {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
-        }
-    </style>
-
-    <div style="width: 100%; overflow: hidden;">
-        <!-- The auto-scrolling track -->
-        <div class="t-marquee-wrap">
-            
+    <!-- Container that actually scrolls safely -->
+    <div class="container-fluid" style="padding: 0;">
+        <div id="jsMarqueeTrack" style="display: flex; gap: 30px; overflow-x: auto; padding-bottom: 30px; scrollbar-width: none; white-space: nowrap;">
             <!-- Group 1 -->
-            <div style="display: flex;">
-                {% for client_review in testimonials %}
-                <div class="t-card">
-                    <div style="font-size: 60px; color: #c5a059; opacity: 0.2; line-height: 1; margin-bottom: 5px; font-family: serif;">"</div>
-                    <p style="font-size: 15px; color: #555; font-style: italic; line-height: 1.8; margin-bottom: 25px; white-space: normal;">
-                        {{ client_review.feedback }}
-                    </p>
-                    <div style="font-weight: bold; color: #111; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">
-                        {{ client_review.client_name }}
-                    </div>
+            {% for client_review in testimonials %}
+            <div style="min-width: 400px; background: #fff; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-radius: 6px; white-space: normal; display: inline-block; vertical-align: top;">
+                <div style="font-size: 50px; color: #c5a059; opacity: 0.3; line-height: 1; margin-bottom: 15px; font-family: serif;">"</div>
+                <p style="font-size: 15px; color: #555; font-style: italic; line-height: 1.8; margin-bottom: 25px;">
+                    {{ client_review.feedback }}
+                </p>
+                <div style="font-weight: bold; color: #111; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">
+                    {{ client_review.client_name }}
                 </div>
-                {% endfor %}
-                {% for client_review in testimonials %}
-                <div class="t-card">
-                    <div style="font-size: 60px; color: #c5a059; opacity: 0.2; line-height: 1; margin-bottom: 5px; font-family: serif;">"</div>
-                    <p style="font-size: 15px; color: #555; font-style: italic; line-height: 1.8; margin-bottom: 25px; white-space: normal;">
-                        {{ client_review.feedback }}
-                    </p>
-                    <div style="font-weight: bold; color: #111; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">
-                        {{ client_review.client_name }}
-                    </div>
+                <div style="color: #888; font-size: 11px; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px;">
+                    Client
                 </div>
-                {% endfor %}
             </div>
-
-            <!-- Group 2 for seamless loop -->
-            <div style="display: flex;">
-                {% for client_review in testimonials %}
-                <div class="t-card">
-                    <div style="font-size: 60px; color: #c5a059; opacity: 0.2; line-height: 1; margin-bottom: 5px; font-family: serif;">"</div>
-                    <p style="font-size: 15px; color: #555; font-style: italic; line-height: 1.8; margin-bottom: 25px; white-space: normal;">
-                        {{ client_review.feedback }}
-                    </p>
-                    <div style="font-weight: bold; color: #111; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">
-                        {{ client_review.client_name }}
-                    </div>
+            {% endfor %}
+            <!-- Group 2 (Duplicate for smooth infinite scroll illusion) -->
+            {% for client_review in testimonials %}
+            <div style="min-width: 400px; background: #fff; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-radius: 6px; white-space: normal; display: inline-block; vertical-align: top;">
+                <div style="font-size: 50px; color: #c5a059; opacity: 0.3; line-height: 1; margin-bottom: 15px; font-family: serif;">"</div>
+                <p style="font-size: 15px; color: #555; font-style: italic; line-height: 1.8; margin-bottom: 25px;">
+                    {{ client_review.feedback }}
+                </p>
+                <div style="font-weight: bold; color: #111; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;">
+                    {{ client_review.client_name }}
                 </div>
-                {% endfor %}
-                {% for client_review in testimonials %}
-                <div class="t-card">
-                    <div style="font-size: 60px; color: #c5a059; opacity: 0.2; line-height: 1; margin-bottom: 5px; font-family: serif;">"</div>
-                    <p style="font-size: 15px; color: #555; font-style: italic; line-height: 1.8; margin-bottom: 25px; white-space: normal;">
-                        {{ client_review.feedback }}
-                    </p>
-                    <div style="font-weight: bold; color: #111; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">
-                        {{ client_review.client_name }}
-                    </div>
+                <div style="color: #888; font-size: 11px; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px;">
+                    Client
                 </div>
-                {% endfor %}
             </div>
-
+            {% endfor %}
         </div>
     </div>
 </div>
+
+<script>
+    // JS based infinite marquee that avoids CSS layout bugs
+    document.addEventListener("DOMContentLoaded", function() {
+        var track = document.getElementById("jsMarqueeTrack");
+        if(track) {
+            // Hide the scrollbar physically
+            track.style.cssText += '-ms-overflow-style: none; scrollbar-width: none;';
+            var isPaused = false;
+            
+            track.addEventListener('mouseenter', function() { isPaused = true; });
+            track.addEventListener('mouseleave', function() { isPaused = false; });
+            // For touch
+            track.addEventListener('touchstart', function() { isPaused = true; });
+            track.addEventListener('touchend', function() { isPaused = false; });
+
+            function scrollTicker() {
+                if (!isPaused) {
+                    track.scrollLeft += 1;
+                    // Reset if we've scrolled exactly halfway
+                    if (track.scrollLeft >= (track.scrollWidth / 2)) {
+                        track.scrollLeft = 0;
+                    }
+                }
+                requestAnimationFrame(scrollTicker);
+            }
+            requestAnimationFrame(scrollTicker);
+        }
+    });
+</script>
 
 
 <!-- 8. FLOATING WHATSAPP BUTTON -->
