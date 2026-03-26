@@ -542,114 +542,34 @@
 </div>
 
 <!-- 6. TESTIMONIALS -->
-<!-- 6. TESTIMONIALS -->
-<div class="testimonials-section" style="padding: 140px 0; background-color: #fcfcfc; overflow: hidden; position: relative;">
-    <div class="container" style="text-align: center; margin-bottom: 60px;">
-        <div style="font-size: 11px; letter-spacing: 2px; color: var(--gold, #c5a059); text-transform: uppercase; font-weight: 700; margin-bottom: 15px;">Client Reviews</div>
-        <h2 style="font-size: 48px; font-weight: 700; color: #111; margin: 0;">What They Say.</h2>
+<div style="background-color: #f7f7f7; padding: 120px 0;">
+    <div class="container" style="text-align: center; margin-bottom: 50px;">
+        <div style="color: #c5a059; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">Client Reviews</div>
+        <h2 style="font-size: 40px; color: #111; margin-top: 10px;">What They Say.</h2>
     </div>
 
-    <style>
-        .marquee-track {
-            display: flex;
-            width: max-content;
-            animation: scroller 40s linear infinite;
-        }
-        .marquee-track:hover {
-            animation-play-state: paused;
-        }
-        .t-card {
-            width: 450px;
-            background: #fff;
-            margin: 0 15px;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
-            flex-shrink: 0;
-            position: relative;
-        }
-        .t-quote {
-            font-size: 60px;
-            color: #c5a059;
-            opacity: 0.2;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            line-height: 1;
-            font-family: serif;
-        }
-        .t-text {
-            font-size: 15px;
-            color: #666;
-            line-height: 1.8;
-            font-style: italic;
-            margin: 20px 0 30px;
-            position: relative;
-            z-index: 1;
-        }
-        .t-author {
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #111;
-            text-transform: uppercase;
-            margin: 0 0 5px;
-        }
-        .t-role {
-            font-size: 11px;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        @keyframes scroller {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
-        }
-    </style>
-
-    <div style="display: flex; overflow: hidden; width: 100%;">
-        <div class="marquee-track">
-            <!-- Group 1 -->
-            <div style="display: flex;">
-                {% for client_review in testimonials %}
-                <div class="t-card">
-                    <div class="t-quote">"</div>
-                    <div class="t-text">{{ client_review.feedback }}</div>
-                    <div class="t-author">{{ client_review.client_name }}</div>
-                    <div class="t-role">Satisfied Client</div>
+    <!-- Very simple horizontally scrolling container to test visibility and layout -->
+    <div class="container">
+        <div style="display: flex; gap: 30px; overflow-x: auto; padding-bottom: 30px; scrollbar-width: none;">
+            <!-- Render just the raw cards once, no duplication, no animation yet -->
+            {% for client_review in testimonials %}
+            <div style="min-width: 350px; background: #fff; padding: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-radius: 6px;">
+                <div style="font-size: 50px; color: #c5a059; opacity: 0.3; line-height: 1; margin-bottom: 15px;">"</div>
+                <p style="font-size: 15px; color: #555; font-style: italic; line-height: 1.8; margin-bottom: 25px;">
+                    {{ client_review.feedback }}
+                </p>
+                <div style="font-weight: bold; color: #111; text-transform: uppercase; font-size: 14px;">
+                    {{ client_review.client_name }}
                 </div>
-                {% endfor %}
-                {% for client_review in testimonials %}
-                <div class="t-card">
-                    <div class="t-quote">"</div>
-                    <div class="t-text">{{ client_review.feedback }}</div>
-                    <div class="t-author">{{ client_review.client_name }}</div>
-                    <div class="t-role">Satisfied Client</div>
+                <div style="color: #888; font-size: 12px; margin-top: 5px; text-transform: uppercase;">
+                    Client
                 </div>
-                {% endfor %}
             </div>
-            <!-- Group 2 (Exact Clone for loop) -->
-            <div style="display: flex;">
-                {% for client_review in testimonials %}
-                <div class="t-card">
-                    <div class="t-quote">"</div>
-                    <div class="t-text">{{ client_review.feedback }}</div>
-                    <div class="t-author">{{ client_review.client_name }}</div>
-                    <div class="t-role">Satisfied Client</div>
-                </div>
-                {% endfor %}
-                {% for client_review in testimonials %}
-                <div class="t-card">
-                    <div class="t-quote">"</div>
-                    <div class="t-text">{{ client_review.feedback }}</div>
-                    <div class="t-author">{{ client_review.client_name }}</div>
-                    <div class="t-role">Satisfied Client</div>
-                </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
+
 
 <!-- 8. FLOATING WHATSAPP BUTTON -->
 <style>
