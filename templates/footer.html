@@ -1,57 +1,109 @@
 {% load static %}
-<footer class="prague-footer default">
-        <img src="{% static 'img/home/ffa51a33625455.56b20f01c3608.jpg' %}" data-lazy-src="{% static 'img/home/ffa51a33625455.56b20f01c3608.jpg' %}" class="s-img-switch" alt="footer banner" />
-        <div class="footer-content-outer">
-            <div class="footer-top-content">
-                <div class="prague-footer-main-block">
-                    <div class="prague-logo">
-                        <a href="index.html">
-                            <img src="{% static 'img/home/palladian_1.png' %}" width = "145" height="45" data-lazy-src="{% static 'img/home/palladian_1.png' %}" class="attachment-full size-full"
-                                alt="logo" /> </a>
-                    </div>
+<footer style="background:#111; color:#aaa; padding:60px 0 0 0;">
+    <div class="container">
+        <div class="row">
 
-                    <div class="footer-main-content">
-                        <p>{{footer_content.short_description}}</p>
-                    </div>
-
-                </div>
-                <div class="prague-footer-info-block">
-
-                    <h6 class="footer-info-block-title">GET IN TOUCH</h6>
-
-                    <div class="footer-info-block-content">
-                        <p>Shivam Dixit: <a href="tel:{{footer_content.contact_no}}">{{footer_content.contact_no}}</a></p>
-                        <p><a href="{{footer_content.mail}}">{{footer_content.mail}}</a></p>
-                        <p>{{footer_content.address}}</p>
-                        <p>Indore,Madhya Pradesh 452001</p>
-                    </div>
-
+            <!-- Column 1: Logo + description -->
+            <div class="col-sm-6 col-md-3" style="margin-bottom:40px;">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/home/palladian_1.png' %}" width="130" alt="Palladian Designers Logo"
+                         style="filter:brightness(10); margin-bottom:18px; display:block;" />
+                </a>
+                <p style="font-size:13px; line-height:1.8; color:#777;">
+                    BIM, Interior, Exterior &amp; 3D design experts based in Indore, India — delivering precision from concept to completion.
+                </p>
+                <!-- Software badges -->
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px;">
+                    <span style="background:#222; color:#aaa; padding:3px 10px; border-radius:3px; font-size:10px; letter-spacing:1px; border:1px solid #333;">REVIT</span>
+                    <span style="background:#222; color:#aaa; padding:3px 10px; border-radius:3px; font-size:10px; letter-spacing:1px; border:1px solid #333;">AUTOCAD</span>
+                    <span style="background:#222; color:#aaa; padding:3px 10px; border-radius:3px; font-size:10px; letter-spacing:1px; border:1px solid #333;">LUMION</span>
+                    <span style="background:#222; color:#aaa; padding:3px 10px; border-radius:3px; font-size:10px; letter-spacing:1px; border:1px solid #333;">LOD 300–400</span>
                 </div>
             </div>
-            <div class="footer-bottom-content">
 
-                <!-- Footer copyright -->
-                <div class="footer-copyright">
-                    <p>Palladian (C) {{current_year}} ALL RIGHTS RESERVED</p>
-                    <p>Design and Developed By: <a target="__blank" href="https://www.linkedin.com/in/harshitshreshthi/"><b style="font-size: 13px;">Harshit Shreshthi</b></a></p>
+            <!-- Column 2: Quick Links -->
+            <div class="col-sm-6 col-md-3" style="margin-bottom:40px;">
+                <h6 style="color:#fff; font-size:12px; letter-spacing:3px; text-transform:uppercase; margin-bottom:20px;">Quick Links</h6>
+                <ul style="list-style:none; padding:0; margin:0;">
+                    <li style="margin-bottom:10px;"><a href="{% url 'index' %}" style="color:#777; font-size:13px; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">Home</a></li>
+                    <li style="margin-bottom:10px;"><a href="{% url 'about' %}" style="color:#777; font-size:13px; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">About Us</a></li>
+                    <li style="margin-bottom:10px;"><a href="{% url 'projects' %}" style="color:#777; font-size:13px; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">Projects</a></li>
+                    <li style="margin-bottom:10px;"><a href="/#services" style="color:#777; font-size:13px; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">Services</a></li>
+                    <li style="margin-bottom:10px;"><a href="{% url 'contactus' %}" style="color:#777; font-size:13px; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Contact Info -->
+            <div class="col-sm-6 col-md-3" style="margin-bottom:40px;">
+                <h6 style="color:#fff; font-size:12px; letter-spacing:3px; text-transform:uppercase; margin-bottom:20px;">Contact Info</h6>
+                <ul style="list-style:none; padding:0; margin:0; font-size:13px; line-height:2;">
+                    <li>
+                        <a href="tel:{{ footer_content.contact_no }}" style="color:#777; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">
+                            📞 {{ footer_content.contact_no|default:"+91 9999999999" }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:{{ footer_content.mail }}" style="color:#777; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">
+                            ✉️ {{ footer_content.mail|default:"info@palladiandesigners.com" }}
+                        </a>
+                    </li>
+                    <li style="color:#777;">📍 {{ footer_content.address|default:"Indore, Madhya Pradesh" }}</li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Social Icons -->
+            <div class="col-sm-6 col-md-3" style="margin-bottom:40px;">
+                <h6 style="color:#fff; font-size:12px; letter-spacing:3px; text-transform:uppercase; margin-bottom:20px;">Follow Us</h6>
+                <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/palladian_designers/" target="_blank" rel="noopener"
+                       style="width:40px; height:40px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#aaa; text-decoration:none; font-size:16px; transition:all 0.2s;"
+                       onmouseover="this.style.background='#E1306C';this.style.borderColor='#E1306C';this.style.color='#fff'"
+                       onmouseout="this.style.background='transparent';this.style.borderColor='#333';this.style.color='#aaa'"
+                       title="Instagram">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/company/palladiandesigners/" target="_blank" rel="noopener"
+                       style="width:40px; height:40px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#aaa; text-decoration:none; font-size:16px; transition:all 0.2s;"
+                       onmouseover="this.style.background='#0077B5';this.style.borderColor='#0077B5';this.style.color='#fff'"
+                       onmouseout="this.style.background='transparent';this.style.borderColor='#333';this.style.color='#aaa'"
+                       title="LinkedIn">
+                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/palladiandesigners" target="_blank" rel="noopener"
+                       style="width:40px; height:40px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#aaa; text-decoration:none; font-size:16px; transition:all 0.2s;"
+                       onmouseover="this.style.background='#1877F2';this.style.borderColor='#1877F2';this.style.color='#fff'"
+                       onmouseout="this.style.background='transparent';this.style.borderColor='#333';this.style.color='#aaa'"
+                       title="Facebook">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </a>
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/919999999999" target="_blank" rel="noopener"
+                       style="width:40px; height:40px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#aaa; text-decoration:none; font-size:16px; transition:all 0.2s;"
+                       onmouseover="this.style.background='#25D366';this.style.borderColor='#25D366';this.style.color='#fff'"
+                       onmouseout="this.style.background='transparent';this.style.borderColor='#333';this.style.color='#aaa'"
+                       title="WhatsApp">
+                        <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                    </a>
                 </div>
-                <!-- End footer copyright -->
+            </div>
 
-                <div class="prague-social-nav">
-                    <ul class="social-content">
-                        <li>
-                            <a target="_blank" href="https://www.linkedin.com/company/palladiandesigners/about/">
-                                <i aria-hidden="true" class="fa fa-linkedin"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a target="_blank" href="https://www.instagram.com/palladian_designers/?igsh=MWtkcGl6ODlpMnN1ZA%3D%3D">
-                                <i aria-hidden="true" class="fa fa-instagram"></i>
-                            </a>
-                        </li>
-                    </ul>
+        </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="border-top:1px solid #222; padding:18px 0; margin-top:20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6" style="color:#555; font-size:12px; letter-spacing:1px;">
+                    &copy; 2024 Palladian Designers Pvt. Ltd. All rights reserved.
+                </div>
+                <div class="col-sm-6" style="text-align:right; color:#555; font-size:12px;">
+                    Design &amp; BIM Solutions — Indore, India
                 </div>
             </div>
         </div>
-
-    </footer>
+    </div>
+</footer>

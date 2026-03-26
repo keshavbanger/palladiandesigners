@@ -9,7 +9,7 @@
     <meta name="format-detection" content="telephone=no" />
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700">
-    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}" />
     <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/slick.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css'%}">
@@ -19,8 +19,10 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'css/unit-test.css'%}">
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
-    {% comment %} <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css"> {% endcomment %}
-    {% comment %} <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script> {% endcomment %}
+    {% comment %}
+    <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css"> {% endcomment %}
+    {% comment %}
+    <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script> {% endcomment %}
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         /* Style for the container */
@@ -55,26 +57,18 @@
 </head>
 
 <body>
-    <!--PRELOADER-->
-    <div class="prague-loader">
-        <div class="prague-loader-wrapper">
-            <div class="prague-loader-bar">
-                PALLADIAN
-            </div>
-        </div>
-    </div>
-    <!--/PRELOADER-->
+    <!--PRELOADER REMOVED FOR BETTER UX-->
 
     <!--HEADER-->
-        {% include "header.html" %}
+    {% include "header.html" %}
     <!--END HEADER-->
 
     <!--MAIN BODY-->
-        {% block content %}{% endblock content %}
+    {% block content %}{% endblock content %}
     <!--/MAIN BODY-->
 
     <!-- START FOOTER -->
-        {% include "footer.html" %}
+    {% include "footer.html" %}
     <!--/END FOOTER-->
 
     <script src="{% static 'js/jquery.js'%}"></script>
@@ -85,7 +79,7 @@
     <script src="{% static 'js/all.js'%}"></script>
     <script src="{% static 'js/vivus.min.js' %}"></script>
     <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
- 
+
 </body>
 
 </html>

@@ -1,238 +1,682 @@
 {% extends "base.html" %}
 {% block title %}
-    Palladian Designers | Home Page
+    Palladian Designers | BIM, Interior & Exterior Design Experts
 {% endblock title %}
 {% load static %}
 {% block content %}
-    <div class="row">
-        <div class="col-xs-12 no-padd">
-            <div class="container-fluid top-banner no-padd  big fullheight light">
-                {% if slider_img %}
-                    <img src="{{ MEDIA_URL }}{{ slider_img }}" class="s-img-switch" alt="top-banner image" />
-                {% else %}
-                {% endif %}
-                <span class="overlay"></span>
-                <div class="content" style="margin-top: 250px !important;">
-                    <div class="prague-svg-animation-text"></div>
-                    {% comment %} <div class="subtitle">Indore, Madhya Pradesh</div>
-                    <h1 class="title">Palladian Designers<br /></h1>
-                    <div class="description">
-                        <p>Designing & Drafting Services</p>
-                    </div> {% endcomment %}
-                    <a href="{% url 'projects' %}" class="a-btn creative" target=" _blank">
-                        <span class="a-btn-line "></span>EXPLORE IT</a>
+
+<style>
+    /* GLOBAL THEME ACCENTS */
+    :root {
+        --gold: #c5a059; /* Classic architectural gold */
+        --gold-light: #e3c18b;
+        --dark-bg: #111111;
+    }
+
+    /* SECTION 1: WALKTHROUGH */
+    .walkthrough-outer {
+        background-color: var(--dark-bg);
+        position: relative;
+        padding: 100px 0;
+        overflow: hidden;
+    }
+    .walkthrough-bg-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 40vw;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.03);
+        line-height: 1;
+        z-index: 0;
+        pointer-events: none;
+        user-select: none;
+    }
+    .video-frame-wrapper {
+        position: relative;
+        max-width: 1047px;
+        margin: 0 auto;
+        z-index: 1;
+        box-shadow: 0 0 50px rgba(197, 160, 89, 0.15); /* Subtle gold glow */
+    }
+    /* Gold corner brackets */
+    .video-frame-wrapper::before, .video-frame-wrapper::after,
+    .video-corner-bl, .video-corner-br {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--gold);
+        z-index: 2;
+        pointer-events: none;
+    }
+    .video-frame-wrapper::before { top: -10px; left: -10px; border-right: 0; border-bottom: 0; }
+    .video-frame-wrapper::after { top: -10px; right: -10px; border-left: 0; border-bottom: 0; }
+    .video-corner-bl { bottom: -10px; left: -10px; border-right: 0; border-top: 0; }
+    .video-corner-br { bottom: -10px; right: -10px; border-left: 0; border-top: 0; }
+
+    .video-stats-bar {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        margin-top: 40px;
+        border-top: 1px solid rgba(197, 160, 89, 0.3);
+        padding-top: 25px;
+    }
+    .stat-item {
+        text-align: center;
+    }
+    .stat-value {
+        display: block;
+        color: var(--gold);
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+    .stat-label {
+        color: #888;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* SECTION 2: ABOUT US */
+    .about-editorial-wrap {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        padding: 120px 0;
+    }
+    .about-visual-col {
+        flex: 1;
+        position: relative;
+    }
+    .giant-year {
+        font-family: 'Playfair Display', serif;
+        font-size: 180px;
+        line-height: 0.8;
+        color: #f0f0f0;
+        position: absolute;
+        top: -60px;
+        left: -30px;
+        z-index: 0;
+        font-weight: 900;
+    }
+    .about-studio-img {
+        width: 100%;
+        position: relative;
+        z-index: 1;
+        box-shadow: 20px 20px 0 var(--gold);
+    }
+    .about-content-col {
+        flex: 1.2;
+    }
+    .accent-italic {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: var(--gold);
+        font-weight: 400;
+    }
+    .gold-divider {
+        width: 60px;
+        height: 2px;
+        background: var(--gold);
+        margin: 30px 0;
+    }
+    .animated-stats-grid {
+        display: flex;
+        gap: 50px;
+        margin-top: 40px;
+    }
+    .counter-box .count-num {
+        font-size: 48px;
+        font-weight: 700;
+        color: #111;
+        display: block;
+    }
+    .counter-box .count-label {
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    /* SECTION 3: WHAT WE DO (SERVICES) */
+    .services-grid-asymmetric {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
+        gap: 30px;
+        margin-top: 60px;
+    }
+    .service-card {
+        background: #fff;
+        position: relative;
+        padding: 40px;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    }
+    .service-card.large-feat {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    .service-card.full-feat {
+        grid-column: span 2;
+    }
+    .service-card .img-container {
+        width: 100%;
+        height: 220px;
+        margin-bottom: 25px;
+        overflow: hidden;
+    }
+    .service-card.large-feat .img-container {
+        height: 480px;
+    }
+    .service-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%);
+        transition: all 0.8s ease;
+    }
+    .service-card:hover img {
+        filter: grayscale(0%);
+        transform: scale(1.1);
+    }
+    .service-number {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #eee;
+        letter-spacing: 1px;
+    }
+    .explore-link {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #111;
+        text-decoration: none;
+        position: relative;
+        padding-bottom: 5px;
+        margin-top: 15px;
+    }
+    .explore-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30%;
+        height: 2px;
+        background: var(--gold);
+        transition: width 0.3s ease;
+    }
+    .service-card:hover .explore-link::after {
+        width: 100%;
+    }
+
+    /* SECTION 4: PROJECTS REEL */
+    .projects-horizontal-reel {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 40px;
+        cursor: grab;
+        scrollbar-width: thin;
+        scrollbar-color: var(--gold) #f0f0f0;
+    }
+    .projects-horizontal-reel::-webkit-scrollbar {
+        height: 4px;
+    }
+    .projects-horizontal-reel::-webkit-scrollbar-track {
+        background: #f0f0f0;
+    }
+    .projects-horizontal-reel::-webkit-scrollbar-thumb {
+        background: var(--gold);
+    }
+    .project-card-reel {
+        display: inline-block;
+        width: 450px;
+        height: 600px;
+        margin-right: 30px;
+        position: relative;
+        overflow: hidden;
+        vertical-align: top;
+    }
+    .project-card-reel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+    .project-card-reel:hover img {
+        transform: scale(1.05);
+    }
+    .project-reel-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        padding: 40px;
+        transform: translateY(50px);
+        transition: transform 0.5s ease;
+        pointer-events: none;
+    }
+    .project-card-reel:hover .project-reel-info {
+        transform: translateY(0);
+    }
+    .reel-tag {
+        display: inline-block;
+        background: var(--gold);
+        color: #fff;
+        font-size: 10px;
+        letter-spacing: 2px;
+        padding: 4px 12px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+    .reel-title {
+        color: #fff;
+        font-size: 24px;
+        margin: 0 0 5px 0;
+        white-space: normal;
+    }
+    .reel-year {
+        color: #aaa;
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+    .reel-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #fff;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-bottom: 1px solid var(--gold);
+        padding-bottom: 3px;
+    }
+
+    @media (max-width: 991px) {
+        .about-editorial-wrap { flex-direction: column; gap: 40px; }
+        .services-grid-asymmetric { grid-template-columns: 1fr; }
+        .service-card.large-feat, .service-card.full-feat { grid-column: span 1; grid-row: span 1; }
+        .service-card.large-feat .img-container { height: 220px; }
+    }
+</style>
+
+<!-- 1. HERO SECTION -->
+<div class="row">
+    <div class="col-xs-12 no-padd">
+        <div class="container-fluid top-banner no-padd big fullheight light" style="position:relative; overflow:hidden;">
+            {% if slider_img %}
+                <img src="{{ slider_img.slider_image.url }}" class="s-img-switch" alt="top-banner image" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;" />
+            {% endif %}
+            <span class="overlay" style="background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 100%); z-index:1;"></span>
+
+            <div class="content" style="position:relative; z-index:2; text-align:center; padding-top:220px; padding-bottom:60px;">
+                <div class="subtitle" style="color:#ccc; letter-spacing:4px; font-size:13px; margin-bottom:18px;">PALLADIAN DESIGNERS PVT. LTD.</div>
+                <h1 class="title" style="color:#fff; font-size:52px; line-height:1.2; margin-bottom:20px; font-weight:700;">BIM Design &amp; Architecture Experts</h1>
+                <p style="color:#ddd; font-size:18px; max-width:620px; margin:0 auto 36px auto; line-height:1.7;">
+                    From concept to completion — Interior, Exterior &amp; BIM solutions tailored for you.
+                </p>
+                <div style="display:flex; gap:18px; justify-content:center; flex-wrap:wrap;">
+                    <a href="{% url 'contactus' %}" class="a-btn" style="background:#fff; color:#111; padding:14px 34px; font-weight:600; letter-spacing:2px; border:2px solid #fff; text-decoration:none; transition:all 0.3s;">GET A QUOTE</a>
+                    <a href="{% url 'projects' %}" class="a-btn creative" style="border:2px solid #fff; color:#fff; padding:14px 34px; font-weight:600; letter-spacing:2px; text-decoration:none;">
+                        <span class="a-btn-line"></span>VIEW OUR WORK
+                    </a>
                 </div>
-                <div class="top-banner-cursor"></div>
             </div>
+            <div class="top-banner-cursor"></div>
         </div>
-    </div>
-    <div class="container no-padd margin-lg-50b margin-sm-60b margin-xs-40b">
-        <div class="row-fluid  ">
-            <div class=" col-sm-12  padd-only-xs">
-
-                <div class="heading  Center dark">
-
-                    <div class="subtitle ">Walkthrough</div>
-                    <h2 class="title">Experience a detailed journey through our project, showcasing every step from concept to completion.</h2>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="container no-padd">
-        <div class="row-fluid  margin-lg-120b  margin-sm-80b margin-xs-50b">
-            <div class="col-sm-12 no-padd padd-only-small ">
-                <div class="masonry" data-space="30" data-space-tablet='15' >
-                    <div class="grid-sizer"></div>
-                    <div class="grid-item">
-                        <div class="img-wrapp">
-                            <iframe width="1047" height="592" src="https://www.youtube.com/embed/ISTpyfaxlxo" title="BIM Walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container no-padd">
-        <div class="row-fluid  margin-lg-140t margin-sm-70t">
-        <div class="col-sm-8 col-lg-offset-0 no-padd col-lg-4 col-md-offset-0 col-md-5 col-sm-offset-2 col-xs-12  margin-lg-65t margin-sm-0t">
-            <div class="vc_column-inner margin-minus-left">
-                    <div class="prague-counter  alone_item no-figure">
-
-                        <div class="figures ">
-                            <!-- triangle -->
-                        </div>
-
-                        <div class="counter-outer" style="padding:15px;">
-
-                            <img src="{% static 'img/home/stock-photo-66175729.jpg' %}" data-lazy-src="{% static 'img/home/stock-photo-66175729.jpg' %}" alt="experience image"
-                                class="prague-counter-img s-img-switch">
-
-                            <div class="numbers">
-                                <svg>
-                                    <defs>
-                                        <mask id="coming_mask_0" x="0" y="0">
-                                            <rect class="coming-alpha" x="0" y="0" width="100%" height="100%"></rect>
-                                            <text class="count number" x="50%" y="45%" text-anchor="middle"
-                                                alignment-baseline="middle">{{total_company_years}}</text>
-                                            <text class="count title" x="50%" y="70%" text-anchor="middle"
-                                                alignment-baseline="middle">YEARS OF EXPERIENCE</text>
-                                        </mask>
-                                    </defs>
-                                    <rect style="-webkit-mask: url(#coming_mask_0); mask: url(#coming_mask_0);" class="base"
-                                        x="0" y="0" width="100%" height="100%"></rect>
-                                </svg>
-
-
-                            </div>
-
-                        </div>
-                    </div>
-            </div>
-        </div>
-
-        <div class=" no-padd col-sm-12 col-lg-offset-1 col-lg-7 col-md-offset-0 col-md-7 col-sm-offset-0 col-xs-12  margin-sm-20t">
-                    <div class="heading  left dark">
-                        <div class="subtitle ">ABOUT US</div>
-                        <h2 class="title">{{about.heading}}</h2>
-                        <div class="content ">
-                            {{about.text|safe}}
-                        </div>
-                    </div>
-        </div>
-        
     </div>
 </div>
 
-    <div class="margin-lg-20t margin-sm-30t">
-        <div class="container">
-            <div class="row">
-
-                <div class="column colum-container col-sm-12 no-padd margin-lg-20b">
-                    <div class="heading  left dark">
-
-                        <div class="subtitle ">LAST PROJECTS</div>
-                        <h2 class="title">Make it with passion.</h2>
-                    </div>
-                </div>
-
-                <div class="no-padd-left no-padd-right margin-lg-20t">
-                    <div class="wrapper">
-                        <div data-unique-key="139714cb2b9c35c987d2544328454258" class="js-load-more" data-start-page="1"
-                            data-max-page="5" data-next-link="http://prague.loc/page/2/">
-                            <div class="row prague_list prague_count_col1 prague_gap_col10  no-footer-content no-figure prague-load-wrapper"
-                                data-columns="prague_count_col1" data-gap="prague_gap_col10">
-                                {% for project in projects %}
-                                    <div class="project-list-item">
-                                        <div class="project-list-outer">
-
-                                            <div class="project-list-wrapper">
-
-                                                <div class="project-list-img">
-                                                    <img src="media/{{project.project_banner_image}}" data-lazy-src="media/{{project.project_banner_image}}" class="s-img-switch"
-                                                        alt="seascape-villa image" />
-                                                </div>
-
-                                                <div class="project-list-content">
-
-                                                    <div class="project-list-category">{{project.year}}</div>
-                                                    <h3 class="project-list-title"><a href="{% url 'project-details' project.slug%}" target="_self">{{project.title}}</a></h3>
-                                                    <div class="project-list-excerpt">
-                                                        <p>{{project.description}}</p>
-                                                    </div>
-                                                    <a href="{% url 'project-details' project.slug%}" class="project-list-link a-btn-arrow-2"
-                                                        target="_self">
-                                                        <span class="arrow-right"></span>
-                                                        READ</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div  class="row-fluid row-no-padding  margin-lg-105t margin-sm-50t">
-        <div class=" column_container col-sm-12 no-padd">
-            <div class="column-inner">
-                    <div class="prague-shortcode-parent ">
-                        <div class="prague-shortcode-parent-img">
-                            <span class="overlay"></span>
-                            <img src="#" data-lazy-src="{% static 'img/onepage-home/4939b412273735.56265d32438da.jpg' %}" class="s-img-switch" alt="second-banner image" />
-                        </div>
-
-                        <div class="prague-shortcode-content-wrapp">
-                            <div class="prague-shortcode-heading  light left">
-                                <div class="parent-subtitle ">AMBITIOUS CLIENTS</div>
-
-                                <h2 class="parent-title">We have worked with great people.</h2>
-                            </div>
-
-                            <div class="row-fluid ">
-                                {% for cli in top_clients %}
-                                <div class="  col-sm-6 col-md-3 no-padd-small {% if forloop.counter == 1 %} no-padd {% else %}{% endif %}">
-                                        <div class="prague-clients-wrapper ">
-                                            <img style="width: 102px; height: 103px;" class="prague-clients-logo" src="media/{{cli.client_logo}}" data-lazy-src="media/{{cli.client_logo}}" alt="HP image1">
-                                            <div class="prague-clients-overlay"></div>
-                                            <div class="vertical-align prague-clients-link">
-                                                <a href="{{ cli.client_site }}" class="prague-clients-name a-btn-arrow"
-                                                    target="_blank">
-                                                    VISIT SITE <span class="arrow-right grey"></span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-        </div>
-    </div>
-    <div class="heading  left dark container">
-
-        <div class="subtitle ">Client Reviews</div>
-        <h2 class="title">They love us.</h2>
-
-    </div>
-
-    <div class="container">
-        <div class="row  row-fluid margin-lg-10t margin-lg-145b margin-sm-70b">
-            <div class="testimonials-wrapper  no-figure">
-                <div class="testimonials-swiper swiper-container" data-speed='2000' data-loop='1' data-autoplay='3000'
-                    data-center='0' data-mode='vertical' data-slides-per-view='1' data-lg-slides='1,0' data-md-slides='1,0'
-                    data-sm-slides='1,0' data-xs-slides='1,0'>
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        {% for client_review in testimonials %}
-                            <div class="swiper-slide">
-                                <div class="testimonials-item">
-
-                                    <span class="testimonials-icon fa fa fa-quote-right"></span>
-
-                                    <blockquote class="testimonials-description">
-                                        <p>{{client_review.feedback}}</p>
-                                    </blockquote>
-                                    <h4 class="testimonials-author">{{client_review.client_name}}</h4>
-                                </div>
-                            </div>
-                        {% endfor %}
-
-                    </div>
-                    <!-- If we need pagination -->
-                    <div class="testimonials-pagination-wrapper">
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+<!-- 1. WALKTHROUGH SECTION -->
+<div class="walkthrough-outer">
+    <div class="walkthrough-bg-text">BIM</div>
     
+    <div class="container">
+        <div class="heading Center light" style="margin-bottom:60px; position:relative; z-index:1;">
+            <div class="subtitle" style="color:var(--gold);">Walkthrough</div>
+            <h2 class="title" style="color:#fff;">Experience the Precision</h2>
+        </div>
+
+        <div class="video-frame-wrapper">
+            <div class="video-corner-bl"></div>
+            <div class="video-corner-br"></div>
+            <iframe width="100%" height="592"
+                src="{% if walkthrough %}{{ walkthrough.video_url }}{% else %}https://www.youtube.com/embed/ISTpyfaxlxo{% endif %}"
+                title="BIM Walkthrough" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div class="video-stats-bar">
+            <div class="stat-item">
+                <span class="stat-value">360°</span>
+                <span class="stat-label">Immersion</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">4K</span>
+                <span class="stat-label">Resolution</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">LOD 400</span>
+                <span class="stat-label">Detail Level</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 2. ABOUT US SECTION -->
+<div class="container" id="about">
+    <div class="about-editorial-wrap">
+        <div class="about-visual-col">
+            <div class="giant-year">2010</div>
+            <img src="{% static 'img/home/stock-photo-66175729.jpg' %}" 
+                 class="about-studio-img" alt="Studio Image">
+        </div>
+        
+        <div class="about-content-col">
+            <div class="heading left dark">
+                <div class="subtitle">ESTABLISHED IN 2010</div>
+                <h2 class="title">Designing your <span class="accent-italic">vision</span> with precision and heart.</h2>
+                <div class="gold-divider"></div>
+                <div class="content">
+                    <p>At Palladian Designers Pvt. Ltd., we transform ideas into reality using cutting-edge BIM technology. With over a decade of combined experience, we deliver world-class interior, exterior, and 3D design solutions — blending creativity with precision.</p>
+                </div>
+            </div>
+
+            <div class="animated-stats-grid">
+                <div class="counter-box">
+                    <span class="count-num" data-target="5">0</span>
+                    <span class="count-label">Years Experience</span>
+                </div>
+                <div class="counter-box">
+                    <span class="count-num" data-target="50">0</span>
+                    <span class="count-label">Projects Completed</span>
+                </div>
+                <div class="counter-box">
+                    <span class="count-num" data-target="10">0</span>
+                    <span class="count-label">Happy Clients</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px;">
+                <a href="{% url 'about' %}" class="explore-link">LEARN MORE ABOUT OUR JOURNEY</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 3. SERVICES SECTION -->
+<div id="services" class="margin-lg-105t margin-sm-60t" style="background:#fcfcfc; padding: 120px 0;">
+    <div class="container">
+        <div class="heading left dark">
+            <div class="subtitle">EXPERTISE</div>
+            <h2 class="title">What We Do.</h2>
+        </div>
+
+        <div class="services-grid-asymmetric">
+            <!-- BIM Modeling (Large) -->
+            <div class="service-card large-feat">
+                <span class="service-number">01</span>
+                <div class="img-container">
+                    <img src="{% static 'img/services/bim_modeling.png' %}" alt="BIM Modeling">
+                </div>
+                <h4 style="font-size:18px; font-weight:700; letter-spacing:1px; margin-bottom:15px;">BIM MODELING</h4>
+                <p style="color:#666; font-size:14px; line-height:1.7;">Detailed Revit models from LOD 100 to 400 for construction, coordination, and structural analysis.</p>
+                <a href="{% url 'contactus' %}" class="explore-link">EXPLORE SERVICE</a>
+            </div>
+
+            <!-- Interior Design -->
+            <div class="service-card">
+                <span class="service-number">02</span>
+                <div class="img-container">
+                    <img src="{% static 'img/services/interior_design.png' %}" alt="Interior Design">
+                </div>
+                <h4 style="font-size:16px; font-weight:700; letter-spacing:1px; margin-bottom:10px;">INTERIOR DESIGN</h4>
+                <p style="color:#666; font-size:13px; line-height:1.7;">Curated spaces for living and working that balance functionality with aesthetic flair.</p>
+                <a href="{% url 'projects' %}" class="explore-link">EXPLORE SERVICE</a>
+            </div>
+
+            <!-- Exterior Design -->
+            <div class="service-card">
+                <span class="service-number">03</span>
+                <div class="img-container">
+                    <img src="{% static 'img/services/exterior_design.png' %}" alt="Exterior Design">
+                </div>
+                <h4 style="font-size:16px; font-weight:700; letter-spacing:1px; margin-bottom:10px;">EXTERIOR DESIGN</h4>
+                <p style="color:#666; font-size:13px; line-height:1.7;">Facades and landscape environments designed to leave a lasting impact from every angle.</p>
+                <a href="{% url 'projects' %}" class="explore-link">EXPLORE SERVICE</a>
+            </div>
+
+            <!-- 3D Conversion (Full Width) -->
+            <div class="service-card full-feat">
+                <span class="service-number">04</span>
+                <div style="display: flex; gap: 40px; align-items: center;">
+                    <div class="img-container" style="flex: 1; height: 300px; margin-bottom: 0;">
+                        <img src="{% static 'img/services/3d_conversion.png' %}" alt="3D Conversion">
+                    </div>
+                    <div style="flex: 1;">
+                        <h4 style="font-size:18px; font-weight:700; letter-spacing:1px; margin-bottom:15px;">3D CONVERSION</h4>
+                        <p style="color:#666; font-size:14px; line-height:1.7;">Transforming PDF, sketches, and point cloud data into precise, editable 3D architectural models with high fidelity.</p>
+                        <a href="{% url 'contactus' %}" class="explore-link">EXPLORE SERVICE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 4. PROJECTS SECTION -->
+<div class="margin-lg-120t margin-sm-80t" style="background: #111; padding: 100px 0;">
+    <div class="container">
+        <div class="heading left light">
+            <div class="subtitle" style="color:var(--gold);">PORTFOLIO</div>
+            <h2 class="title" style="color:#fff;">Our Crafted Works.</h2>
+        </div>
+    </div>
+
+    <div class="projects-horizontal-reel" id="projectsReel">
+        {% for project in projects %}
+        <div class="project-card-reel">
+            <img src="media/{{ project.project_banner_image }}" alt="{{ project.title }}">
+            <div class="project-reel-info">
+                <span class="reel-tag">{{ project.project_category.title }}</span>
+                <h3 class="reel-title">{{ project.title }}</h3>
+                <span class="reel-year">{{ project.year }}</span>
+                <br>
+                <a href="{% url 'project-details' project.slug %}" class="reel-link">VIEW PROJECT</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- 5. CLIENTS SECTION -->
+<div class="row-fluid row-no-padding margin-lg-105t margin-sm-50t">
+    <div class="column_container col-sm-12 no-padd">
+        <div class="column-inner">
+            <div class="prague-shortcode-parent">
+                <div class="prague-shortcode-parent-img">
+                    <span class="overlay"></span>
+                    <img src="#" data-lazy-src="{% static 'img/onepage-home/4939b412273735.56265d32438da.jpg' %}" class="s-img-switch" alt="clients banner" />
+                </div>
+                <div class="prague-shortcode-content-wrapp">
+                    <div class="prague-shortcode-heading light left">
+                        <div class="parent-subtitle">OUR CLIENTS</div>
+                        <h2 class="parent-title">Clients We've Worked With.</h2>
+                    </div>
+                    <div class="row-fluid">
+                        {% for cli in top_clients %}
+                        <div class="col-sm-6 col-md-3 no-padd-small {% if forloop.counter == 1 %}no-padd{% endif %}">
+                            <div class="prague-clients-wrapper" style="text-align:center;">
+                                <img style="width:102px; height:103px; margin:0 auto;" class="prague-clients-logo"
+                                     src="media/{{ cli.client_logo }}"
+                                     data-lazy-src="media/{{ cli.client_logo }}"
+                                     alt="{{ cli.client_name }}">
+                                <div class="prague-clients-overlay"></div>
+                                {% if cli.client_site %}
+                                <div class="vertical-align prague-clients-link">
+                                    <a href="{% if 'http' in cli.client_site %}{{ cli.client_site }}{% else %}https://{{ cli.client_site }}{% endif %}"
+                                       class="prague-clients-name a-btn-arrow" target="_blank">
+                                        VISIT SITE <span class="arrow-right grey"></span>
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 6. TESTIMONIALS -->
+<div class="heading left dark container" style="margin-top:80px;">
+    <div class="subtitle">Client Reviews</div>
+    <h2 class="title">They love us.</h2>
+</div>
+<div class="container" style="margin-top:30px; margin-bottom:80px;">
+    <div class="row">
+        {% for client_review in testimonials %}
+        <div class="col-sm-6 col-md-4" style="margin-bottom:30px;">
+            <div style="background:#f9f9f9; padding:30px 28px; height:100%; position:relative;">
+                <span style="font-size:40px; color:#ddd; line-height:1; display:block; margin-bottom:10px;">&ldquo;</span>
+                <blockquote style="border:none; padding:0; margin:0 0 20px 0; font-size:14px; color:#444; line-height:1.8; font-style:italic;">
+                    {{ client_review.feedback }}
+                </blockquote>
+                <h4 style="font-size:13px; font-weight:700; letter-spacing:2px; color:#111; margin:0 0 4px 0; text-transform:uppercase;">{{ client_review.client_name }}</h4>
+                <span style="font-size:11px; color:#999; letter-spacing:1px;">
+                    {% if "yamini" in client_review.client_name|lower %}Interior Design Client
+                    {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
+                    {% elif "girraj" in client_review.client_name|lower %}Residential Project
+                    {% else %}Satisfied Client{% endif %}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- 8. FLOATING WHATSAPP BUTTON -->
+<style>
+    .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 58px;
+        height: 58px;
+        background: #25D366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        box-shadow: 0 4px 18px rgba(37, 211, 102, 0.5);
+        text-decoration: none;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .whatsapp-float:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 24px rgba(37,211,102,0.7);
+    }
+    .whatsapp-float svg {
+        width: 30px;
+        height: 30px;
+        fill: #fff;
+    }
+    .whatsapp-float .wa-tooltip {
+        position: absolute;
+        right: 66px;
+        background: #333;
+        color: #fff;
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+        letter-spacing: 1px;
+    }
+    .whatsapp-float:hover .wa-tooltip { opacity: 1; }
+</style>
+<a href="https://wa.me/919999999999" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <span class="wa-tooltip">Chat with us</span>
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.474 2.027 7.774L0 32l8.468-2.001A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.234 22.234c-.343.965-1.999 1.84-2.756 1.955-.75.117-1.687.165-2.72-.17-.628-.203-1.432-.473-2.46-.928-4.33-1.872-7.16-6.237-7.376-6.52-.216-.283-1.76-2.334-1.76-4.455s1.113-3.162 1.507-3.594c.394-.432.858-.54 1.143-.54.286 0 .572.003.82.015.264.013.617-.1.966.736.36.859 1.224 2.98 1.33 3.197.107.216.18.469.035.752-.143.284-.215.46-.428.71-.213.25-.448.558-.64.75-.213.213-.434.443-.187.869.247.426 1.099 1.814 2.36 2.938 1.62 1.445 2.986 1.893 3.41 2.108.424.216.672.18.918-.108.247-.287 1.056-1.234 1.337-1.659.283-.424.565-.354.955-.213.39.143 2.48 1.17 2.905 1.38.424.215.707.322.812.5.105.177.105 1.024-.237 1.99z"/>
+    </svg>
+</a>
+
+<script>
+    // Stats Counter Animation
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const targetValue = parseInt(target.getAttribute('data-target'));
+                let current = 0;
+                const increment = targetValue / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= targetValue) {
+                        target.innerText = targetValue + '+';
+                        clearInterval(timer);
+                    } else {
+                        target.innerText = Math.floor(current) + '+';
+                    }
+                }, 30);
+                observer.unobserve(target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.count-num').forEach(counter => {
+        counterObserver.observe(counter);
+    });
+
+    // Horizontal Scroll Drag
+    const reel = document.getElementById('projectsReel');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    reel.addEventListener('mousedown', (e) => {
+        isDown = true;
+        reel.classList.add('active');
+        startX = e.pageX - reel.offsetLeft;
+        scrollLeft = reel.scrollLeft;
+        reel.style.cursor = 'grabbing';
+    });
+    reel.addEventListener('mouseleave', () => {
+        isDown = false;
+        reel.style.cursor = 'grab';
+    });
+    reel.addEventListener('mouseup', () => {
+        isDown = false;
+        reel.style.cursor = 'grab';
+    });
+    reel.addEventListener('mousemove', (e) => {
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - reel.offsetLeft;
+        const walk = (x - startX) * 2;
+        reel.scrollLeft = scrollLeft - walk;
+    });
+</script>
+
 {% endblock content %}

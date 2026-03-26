@@ -25,16 +25,18 @@ def index(request):
     slider_img = Slider.objects.filter(is_visible = True).last()
     projects = Project.objects.filter(is_featured=True).order_by("-year")
     testimonials = ClientReview.objects.all().order_by('-created_at')
-    about = AboutUs.objects.all().first()
+    about = AboutUs.objects.first()
     top_clients = ClientPage.objects.all()[0:4]
-    year = about.year
+    year = about.year if about else 0
+    walkthroughs = Walkthrough.objects.all().first()
     context = {
         "slider_img": slider_img,
         "projects": projects,
         "testimonials": testimonials,
         "about": about,
         "total_company_years": year,
-        "top_clients": top_clients
+        "top_clients": top_clients,
+        "walkthrough": walkthroughs
     }
     return render(request, 'index.html', context)
 

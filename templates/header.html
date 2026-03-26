@@ -192,6 +192,9 @@
                                 <a href="{% url 'about' %}">About Us</a>
                                 </li>
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
+                                <a href="/#services">Services</a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
                                 <a href="{% url 'projects' %}">Projects</a>
                                 {% comment %} <ul class="sub-menu">
                                         <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{% url 'pricing-plan' %}">Pricing Plan</a></li>
@@ -242,6 +245,9 @@
                 FILTER </a>
         </div>
         {% endif %}
+            <div class="header-cta" style="display: inline-block; vertical-align: middle; margin-right: 20px;">
+                <a href="{% url 'contactus' %}" class="a-btn simple" style="padding: 10px 20px; font-size: 10px; border: 1px solid currentColor;">GET A QUOTE</a>
+            </div>
             <!-- mobile icon -->
             <div class="prague-nav-menu-icon">
                 <a href="#">
