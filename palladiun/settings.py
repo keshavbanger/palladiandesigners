@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'core',
     'django_ckeditor_5',
     "careers",
-    "fontawesome_free",
 ]
 
 if DEBUG:
