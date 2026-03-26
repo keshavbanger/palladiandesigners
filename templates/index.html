@@ -542,154 +542,111 @@
 </div>
 
 <!-- 6. TESTIMONIALS -->
-<style>
-    .testimonials-section {
-        margin-top: 150px;
-        margin-bottom: 120px;
-        overflow: hidden;
-        background: #fff;
-    }
-    .testimonials-heading {
-        text-align: center;
-        margin-bottom: 60px;
-    }
-    .marquee-container {
-        display: flex;
-        overflow: hidden;
-        white-space: nowrap;
-        position: relative;
-        /* Fade edges */
-        -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
-        mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
-    }
-    .marquee-content {
-        display: flex;
-        flex-shrink: 0;
-        animation: marquee 30s linear infinite;
-    }
-    .marquee-container:hover .marquee-content {
-        animation-play-state: paused;
-    }
-    .testimonial-card {
-        width: 420px;
-        flex-shrink: 0;
-        background: #fcfcfc;
-        padding: 40px 35px;
-        margin: 0 15px;
-        border: 1px solid #f0f0f0;
-        border-radius: 8px;
-        white-space: normal;
-        position: relative;
-        text-align: left;
-    }
-    .testimonial-quote-mark {
-        font-size: 70px;
-        color: var(--gold);
-        opacity: 0.15;
-        line-height: 1;
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        font-family: 'Playfair Display', serif;
-    }
-    .testimonial-text {
-        font-size: 15px;
-        color: #555;
-        line-height: 1.8;
-        font-style: italic;
-        margin: 15px 0 25px 0;
-        position: relative;
-        z-index: 1;
-    }
-    .testimonial-author {
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        color: #111;
-        margin: 0 0 5px 0;
-        text-transform: uppercase;
-    }
-    .testimonial-role {
-        font-size: 11px;
-        color: #999;
-        letter-spacing: 1px;
-    }
-
-    @keyframes marquee {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-100%); } 
-    }
-    
-    @media (max-width: 768px) {
-        .testimonials-section { margin-top: 100px; margin-bottom: 80px; }
-        .testimonial-card { width: 320px; padding: 30px 25px; }
-    }
-</style>
-
-<div class="testimonials-section">
-    <div class="container testimonials-heading heading dark">
-        <div class="subtitle" style="text-align:center;">Client Reviews</div>
-        <h2 class="title" style="text-align:center; width:100%;">What They Say.</h2>
+<!-- 6. TESTIMONIALS -->
+<div class="testimonials-section" style="padding: 140px 0; background-color: #fcfcfc; overflow: hidden; position: relative;">
+    <div class="container" style="text-align: center; margin-bottom: 60px;">
+        <div style="font-size: 11px; letter-spacing: 2px; color: var(--gold, #c5a059); text-transform: uppercase; font-weight: 700; margin-bottom: 15px;">Client Reviews</div>
+        <h2 style="font-size: 48px; font-weight: 700; color: #111; margin: 0;">What They Say.</h2>
     </div>
 
-    <div class="marquee-container">
-        <!-- Group 1 -->
-        <div class="marquee-content">
-            {% for client_review in testimonials %}
-            <div class="testimonial-card">
-                <span class="testimonial-quote-mark">&ldquo;</span>
-                <p class="testimonial-text">{{ client_review.feedback }}</p>
-                <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
-                <div class="testimonial-role">
-                    {% if "yamini" in client_review.client_name|lower %}Interior Design Client
-                    {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
-                    {% elif "girraj" in client_review.client_name|lower %}Residential Project
-                    {% else %}Satisfied Client{% endif %}
+    <style>
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: scroller 40s linear infinite;
+        }
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+        .t-card {
+            width: 450px;
+            background: #fff;
+            margin: 0 15px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            flex-shrink: 0;
+            position: relative;
+        }
+        .t-quote {
+            font-size: 60px;
+            color: #c5a059;
+            opacity: 0.2;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            line-height: 1;
+            font-family: serif;
+        }
+        .t-text {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.8;
+            font-style: italic;
+            margin: 20px 0 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .t-author {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #111;
+            text-transform: uppercase;
+            margin: 0 0 5px;
+        }
+        .t-role {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        @keyframes scroller {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+    </style>
+
+    <div style="display: flex; overflow: hidden; width: 100%;">
+        <div class="marquee-track">
+            <!-- Group 1 -->
+            <div style="display: flex;">
+                {% for client_review in testimonials %}
+                <div class="t-card">
+                    <div class="t-quote">"</div>
+                    <div class="t-text">{{ client_review.feedback }}</div>
+                    <div class="t-author">{{ client_review.client_name }}</div>
+                    <div class="t-role">Satisfied Client</div>
                 </div>
-            </div>
-            {% endfor %}
-            {% for client_review in testimonials %}
-            <div class="testimonial-card">
-                <span class="testimonial-quote-mark">&ldquo;</span>
-                <p class="testimonial-text">{{ client_review.feedback }}</p>
-                <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
-                <div class="testimonial-role">
-                    {% if "yamini" in client_review.client_name|lower %}Interior Design Client
-                    {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
-                    {% elif "girraj" in client_review.client_name|lower %}Residential Project
-                    {% else %}Satisfied Client{% endif %}
+                {% endfor %}
+                {% for client_review in testimonials %}
+                <div class="t-card">
+                    <div class="t-quote">"</div>
+                    <div class="t-text">{{ client_review.feedback }}</div>
+                    <div class="t-author">{{ client_review.client_name }}</div>
+                    <div class="t-role">Satisfied Client</div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-        <!-- Group 2 for seamless looping -->
-        <div class="marquee-content" aria-hidden="true">
-            {% for client_review in testimonials %}
-            <div class="testimonial-card">
-                <span class="testimonial-quote-mark">&ldquo;</span>
-                <p class="testimonial-text">{{ client_review.feedback }}</p>
-                <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
-                <div class="testimonial-role">
-                    {% if "yamini" in client_review.client_name|lower %}Interior Design Client
-                    {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
-                    {% elif "girraj" in client_review.client_name|lower %}Residential Project
-                    {% else %}Satisfied Client{% endif %}
+            <!-- Group 2 (Exact Clone for loop) -->
+            <div style="display: flex;">
+                {% for client_review in testimonials %}
+                <div class="t-card">
+                    <div class="t-quote">"</div>
+                    <div class="t-text">{{ client_review.feedback }}</div>
+                    <div class="t-author">{{ client_review.client_name }}</div>
+                    <div class="t-role">Satisfied Client</div>
                 </div>
-            </div>
-            {% endfor %}
-            {% for client_review in testimonials %}
-            <div class="testimonial-card">
-                <span class="testimonial-quote-mark">&ldquo;</span>
-                <p class="testimonial-text">{{ client_review.feedback }}</p>
-                <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
-                <div class="testimonial-role">
-                    {% if "yamini" in client_review.client_name|lower %}Interior Design Client
-                    {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
-                    {% elif "girraj" in client_review.client_name|lower %}Residential Project
-                    {% else %}Satisfied Client{% endif %}
+                {% endfor %}
+                {% for client_review in testimonials %}
+                <div class="t-card">
+                    <div class="t-quote">"</div>
+                    <div class="t-text">{{ client_review.feedback }}</div>
+                    <div class="t-author">{{ client_review.client_name }}</div>
+                    <div class="t-role">Satisfied Client</div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>
