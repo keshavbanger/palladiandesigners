@@ -635,38 +635,60 @@
     <div class="marquee-container">
         <!-- Group 1 -->
         <div class="marquee-content">
-            {% for _ in "12" %}
-                {% for client_review in testimonials %}
-                <div class="testimonial-card">
-                    <span class="testimonial-quote-mark">&ldquo;</span>
-                    <p class="testimonial-text">{{ client_review.feedback }}</p>
-                    <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
-                    <div class="testimonial-role">
-                        {% if "yamini" in client_review.client_name|lower %}Interior Design Client
-                        {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
-                        {% elif "girraj" in client_review.client_name|lower %}Residential Project
-                        {% else %}Satisfied Client{% endif %}
-                    </div>
+            {% for client_review in testimonials %}
+            <div class="testimonial-card">
+                <span class="testimonial-quote-mark">&ldquo;</span>
+                <p class="testimonial-text">{{ client_review.feedback }}</p>
+                <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
+                <div class="testimonial-role">
+                    {% if "yamini" in client_review.client_name|lower %}Interior Design Client
+                    {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
+                    {% elif "girraj" in client_review.client_name|lower %}Residential Project
+                    {% else %}Satisfied Client{% endif %}
                 </div>
-                {% endfor %}
+            </div>
+            {% endfor %}
+            {% for client_review in testimonials %}
+            <div class="testimonial-card">
+                <span class="testimonial-quote-mark">&ldquo;</span>
+                <p class="testimonial-text">{{ client_review.feedback }}</p>
+                <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
+                <div class="testimonial-role">
+                    {% if "yamini" in client_review.client_name|lower %}Interior Design Client
+                    {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
+                    {% elif "girraj" in client_review.client_name|lower %}Residential Project
+                    {% else %}Satisfied Client{% endif %}
+                </div>
+            </div>
             {% endfor %}
         </div>
         <!-- Group 2 for seamless looping -->
         <div class="marquee-content" aria-hidden="true">
-            {% for _ in "12" %}
-                {% for client_review in testimonials %}
-                <div class="testimonial-card">
-                    <span class="testimonial-quote-mark">&ldquo;</span>
-                    <p class="testimonial-text">{{ client_review.feedback }}</p>
-                    <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
-                    <div class="testimonial-role">
-                        {% if "yamini" in client_review.client_name|lower %}Interior Design Client
-                        {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
-                        {% elif "girraj" in client_review.client_name|lower %}Residential Project
-                        {% else %}Satisfied Client{% endif %}
-                    </div>
+            {% for client_review in testimonials %}
+            <div class="testimonial-card">
+                <span class="testimonial-quote-mark">&ldquo;</span>
+                <p class="testimonial-text">{{ client_review.feedback }}</p>
+                <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
+                <div class="testimonial-role">
+                    {% if "yamini" in client_review.client_name|lower %}Interior Design Client
+                    {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
+                    {% elif "girraj" in client_review.client_name|lower %}Residential Project
+                    {% else %}Satisfied Client{% endif %}
                 </div>
-                {% endfor %}
+            </div>
+            {% endfor %}
+            {% for client_review in testimonials %}
+            <div class="testimonial-card">
+                <span class="testimonial-quote-mark">&ldquo;</span>
+                <p class="testimonial-text">{{ client_review.feedback }}</p>
+                <h4 class="testimonial-author">{{ client_review.client_name }}</h4>
+                <div class="testimonial-role">
+                    {% if "yamini" in client_review.client_name|lower %}Interior Design Client
+                    {% elif "supriya" in client_review.client_name|lower %}BIM Services Client
+                    {% elif "girraj" in client_review.client_name|lower %}Residential Project
+                    {% else %}Satisfied Client{% endif %}
+                </div>
+            </div>
             {% endfor %}
         </div>
     </div>
