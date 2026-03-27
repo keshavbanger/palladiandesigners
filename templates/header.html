@@ -21,8 +21,8 @@
                 padding-bottom: 15px !important;
             }
             header.prague-header.scrolled-header {
-                background-color: rgba(10, 10, 10, 0.98) !important; /* Darker background to keep the white logo visible */
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+                background-color: rgba(255, 255, 255, 0.98) !important; /* Back to white background */
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
                 padding-top: 5px !important;
                 padding-bottom: 5px !important;
                 height: auto !important;
@@ -33,18 +33,18 @@
             header.prague-header.scrolled-header .prague-social-nav a,
             header.prague-header.scrolled-header span,
             header.prague-header.scrolled-header i {
-                color: #fff !important; /* Switch to white text against the dark scrolled background */
+                color: #222 !important; /* Theme-friendly dark grey for white header */
             }
             header.prague-header.scrolled-header svg path {
-                fill: #fff !important;
+                fill: #222 !important;
             }
             header.prague-header.scrolled-header .main-menu > li > a:hover {
-                color: var(--gold) !important;
+                color: var(--gold, #c5a059) !important; /* Gold hover from your theme */
             }
 
-            /* Subpage specific: Dark background / White text */
+            /* Subpage specific (non-Home): Start white background with theme-friendly dark text */
             header.prague-header.sub-page-header:not(.scrolled-header) {
-                background-color: #111 !important;
+                background-color: #ffffff !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
             }
             header.prague-header.sub-page-header:not(.scrolled-header) .main-menu > li > a,
@@ -52,10 +52,10 @@
             header.prague-header.sub-page-header:not(.scrolled-header) .prague-social-nav a,
             header.prague-header.sub-page-header:not(.scrolled-header) span,
             header.prague-header.sub-page-header:not(.scrolled-header) i {
-                color: #fff !important;
+                color: #222 !important;
             }
             header.prague-header.sub-page-header:not(.scrolled-header) svg path {
-                fill: #fff !important;
+                fill: #222 !important;
             }
         </style>
         <script>
