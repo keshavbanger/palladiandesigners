@@ -322,9 +322,9 @@
     <div class="col-xs-12 no-padd">
         <div class="container-fluid top-banner no-padd big fullheight light" style="position:relative; overflow:hidden;">
             {% if slider_img %}
-                <img src="{{ slider_img.slider_image.url }}" class="s-img-switch" alt="top-banner image" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;" />
+                <img src="{{ slider_img.slider_image.url }}?v=2" class="s-img-switch" alt="top-banner image" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;" />
             {% endif %}
-            <span class="overlay" style="background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 100%); z-index:1;"></span>
+            <span class="overlay" style="background: rgba(0, 0, 0, 0.1); z-index:1;"></span>
 
             <div class="content" style="position:relative; z-index:2; text-align:center; padding-top:220px; padding-bottom:60px;">
                 <!-- Hidden H1 for SEO compliance since visual text is removed -->
