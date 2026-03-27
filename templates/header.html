@@ -3,7 +3,7 @@
         <!--LOGO-->
         <style>
             .image_logo {
-                height: 60px !important;
+                height: 90px !important; /* Significantly increased logo size per user request */
                 width: auto !important;
                 max-width: none !important;
                 object-fit: contain;
@@ -27,7 +27,22 @@
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
             }
             header.prague-header.scrolled-header .image_logo {
-                height: 50px !important; /* Slightly smaller on scroll */
+                height: 75px !important; /* Keeps logo prominent even when scrolling */
+            }
+
+            /* Fix navigation text and icons merging into the white background */
+            header.prague-header.scrolled-header .main-menu > li > a,
+            header.prague-header.scrolled-header .icon-mob-menu,
+            header.prague-header.scrolled-header .prague-social-nav a,
+            header.prague-header.scrolled-header span,
+            header.prague-header.scrolled-header i {
+                color: #222 !important; /* Make nav links and icons dark themed against the solid white header */
+            }
+            header.prague-header.scrolled-header svg path {
+                fill: #222 !important;
+            }
+            header.prague-header.scrolled-header .main-menu > li > a:hover {
+                color: var(--gold) !important; /* Add subtle gold hover effect from existing theme */
             }
         </style>
         <script>
