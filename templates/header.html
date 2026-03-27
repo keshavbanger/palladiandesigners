@@ -16,15 +16,29 @@
             
             /* Scroll-triggered styling */
             header.prague-header {
-                transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+                transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease !important;
+                padding-top: 15px !important;
+                padding-bottom: 15px !important;
             }
             header.prague-header.scrolled-header {
                 background-color: rgba(255, 255, 255, 0.98) !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+                padding-top: 5px !important;
+                padding-bottom: 5px !important;
+                height: auto !important;
+                min-height: 0 !important;
             }
             header.prague-header.dark.scrolled-header {
                 background-color: rgba(20, 20, 20, 0.95) !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+                padding-top: 5px !important;
+                padding-bottom: 5px !important;
+            }
+            header.prague-header.scrolled-header .prague-logo-wrapper,
+            header.prague-header.scrolled-header .prague-header-wrapper,
+            header.prague-header.scrolled-header .prague-navigation {
+                margin: 0 !important;
+                padding: 0 !important;
             }
             header.prague-header.scrolled-header .image_logo {
                 height: 75px !important; /* Keeps logo prominent even when scrolling */
@@ -37,6 +51,11 @@
             header.prague-header.scrolled-header span,
             header.prague-header.scrolled-header i {
                 color: #222 !important; /* Make nav links and icons dark themed against the solid white header */
+            }
+            header.prague-header.scrolled-header .main-menu > li > a {
+                padding-top: 10px !important;
+                padding-bottom: 10px !important;
+                line-height: 1.5 !important;
             }
             header.prague-header.scrolled-header svg path {
                 fill: #222 !important;
