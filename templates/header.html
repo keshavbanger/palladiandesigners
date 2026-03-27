@@ -42,32 +42,22 @@
                 color: var(--gold, #c5a059) !important; /* Gold hover from your theme */
             }
 
-            /* Home Page INITIAL state: Transparent background / White text */
-            header.prague-header.home-header:not(.scrolled-header) .main-menu > li > a,
-            header.prague-header.home-header:not(.scrolled-header) .icon-mob-menu,
-            header.prague-header.home-header:not(.scrolled-header) .prague-social-nav a,
-            header.prague-header.home-header:not(.scrolled-header) span,
-            header.prague-header.home-header:not(.scrolled-header) i {
+            /* All pages (Home & Subpages) INITIAL state: Transparent background / White text */
+            header.prague-header:not(.scrolled-header) .main-menu > li > a,
+            header.prague-header:not(.scrolled-header) .icon-mob-menu,
+            header.prague-header:not(.scrolled-header) .prague-social-nav a,
+            header.prague-header:not(.scrolled-header) span,
+            header.prague-header:not(.scrolled-header) i {
                 color: #ffffff !important;
             }
-            header.prague-header.home-header:not(.scrolled-header) svg path {
+            header.prague-header:not(.scrolled-header) svg path {
                 fill: #ffffff !important;
             }
 
-            /* Subpage specific (non-Home): Start white background with theme-friendly dark text */
-            header.prague-header.sub-page-header:not(.scrolled-header) {
-                background-color: #ffffff !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-            }
-            header.prague-header.sub-page-header:not(.scrolled-header) .main-menu > li > a,
-            header.prague-header.sub-page-header:not(.scrolled-header) .icon-mob-menu,
-            header.prague-header.sub-page-header:not(.scrolled-header) .prague-social-nav a,
-            header.prague-header.sub-page-header:not(.scrolled-header) span,
-            header.prague-header.sub-page-header:not(.scrolled-header) i {
-                color: #222 !important;
-            }
-            header.prague-header.sub-page-header:not(.scrolled-header) svg path {
-                fill: #222 !important;
+            /* No solid background or shadow for any header until scroll */
+            header.prague-header:not(.scrolled-header) {
+                background-color: transparent !important;
+                box-shadow: none !important;
             }
         </style>
         <script>
