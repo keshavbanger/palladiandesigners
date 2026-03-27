@@ -1,12 +1,58 @@
 {% load static %}
 <header class="prague-header simple sticky-menu sticky-mobile-menu {% if header_dark %} dark {% else %}light {% endif %}">
         <!--LOGO-->
+        <style>
+            .image_logo {
+                height: 60px !important;
+                width: auto !important;
+                max-width: none !important;
+                object-fit: contain;
+                transition: height 0.3s ease;
+            }
+            .prague-logo-wrapper {
+                display: inline-block;
+                background-color: rgba(0, 0, 0, 0.85); /* Dark background container for contrast */
+                padding: 8px 15px;
+                border-radius: 6px;
+                transition: all 0.3s ease;
+            }
+            
+            /* Scroll-triggered styling */
+            header.prague-header {
+                transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+            }
+            header.prague-header.scrolled-header {
+                background-color: rgba(255, 255, 255, 0.98) !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+            }
+            header.prague-header.dark.scrolled-header {
+                background-color: rgba(20, 20, 20, 0.95) !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+            }
+            header.prague-header.scrolled-header .image_logo {
+                height: 50px !important; /* Slightly smaller on scroll */
+            }
+        </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const header = document.querySelector("header.prague-header");
+                if (window.scrollY > 40) header.classList.add("scrolled-header");
+                window.addEventListener("scroll", function() {
+                    if (window.scrollY > 40) {
+                        header.classList.add("scrolled-header");
+                    } else {
+                        header.classList.remove("scrolled-header");
+                    }
+                });
+            });
+        </script>
+        
         <div class="prague-logo">
-            <a href="/">
+            <a href="/" class="prague-logo-wrapper">
                 {% if header_dark %}
-                <img src="{% static 'img/home/pd_dark1.jpeg' %}" style="width: 90px;" class="image_logo" alt="logo" />
+                <img src="{% static 'img/home/pd_dark1.jpeg' %}" class="image_logo" alt="Palladian Designers Logo" />
                 {% else %}
-                <img src="{% static 'img/home/palladian_1.png' %}" style="width: 90px;" class="image_logo" alt="logo" />
+                <img src="{% static 'img/home/palladian_1.png' %}" class="image_logo" alt="Palladian Designers Logo" />
                 {% endif %}
             </a>
         </div>
