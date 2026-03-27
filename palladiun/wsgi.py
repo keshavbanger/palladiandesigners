@@ -18,6 +18,12 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'palladiun.settings')
 try:
     from django.core.wsgi import get_wsgi_application
     application = get_wsgi_application()
+    
+    # WhiteNoise bypass for Vercel: forcibly serve Media files through Python since Vercel's static router fails on media folders without @vercel/static
+    from whitenoise import WhiteNoise
+    from django.conf import settings
+    application = WhiteNoise(application, root=settings.MEDIA_ROOT, prefix=settings.MEDIA_URL)
+    
     app = application
 except Exception as e:
     import traceback
