@@ -21,64 +21,30 @@
                 padding-bottom: 15px !important;
             }
             header.prague-header.scrolled-header {
-                background-color: rgba(255, 255, 255, 0.98) !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+                background-color: rgba(10, 10, 10, 0.98) !important; /* Darker background to keep the white logo visible */
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
                 padding-top: 5px !important;
                 padding-bottom: 5px !important;
                 height: auto !important;
                 min-height: 0 !important;
             }
-            header.prague-header.dark.scrolled-header {
-                background-color: rgba(20, 20, 20, 0.95) !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
-                padding-top: 5px !important;
-                padding-bottom: 5px !important;
-            }
-            header.prague-header.scrolled-header .prague-logo-wrapper,
-            header.prague-header.scrolled-header .prague-header-wrapper,
-            header.prague-header.scrolled-header .prague-navigation {
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            header.prague-header.scrolled-header .image_logo {
-                height: 75px !important; /* Keeps logo prominent even when scrolling */
-            }
-
-            /* Fix navigation text and icons merging into the white background */
             header.prague-header.scrolled-header .main-menu > li > a,
             header.prague-header.scrolled-header .icon-mob-menu,
             header.prague-header.scrolled-header .prague-social-nav a,
             header.prague-header.scrolled-header span,
             header.prague-header.scrolled-header i {
-                color: #222 !important; /* Make nav links and icons dark themed against the solid white header */
-            }
-            header.prague-header.scrolled-header .main-menu > li > a {
-                padding-top: 10px !important;
-                padding-bottom: 10px !important;
-                line-height: 1.5 !important;
+                color: #fff !important; /* Switch to white text against the dark scrolled background */
             }
             header.prague-header.scrolled-header svg path {
-                fill: #222 !important;
-            }
-            header.prague-header.scrolled-header .main-menu > li > a:hover {
-                color: var(--gold) !important; /* Add subtle gold hover effect from existing theme */
-            }
-
-            /* Home page specific: Start transparent/white text, go dark on scroll */
-            header.prague-header.home-header:not(.scrolled-header) .main-menu > li > a,
-            header.prague-header.home-header:not(.scrolled-header) .icon-mob-menu,
-            header.prague-header.home-header:not(.scrolled-header) .prague-social-nav a,
-            header.prague-header.home-header:not(.scrolled-header) span,
-            header.prague-header.home-header:not(.scrolled-header) i {
-                color: #fff !important;
-            }
-            header.prague-header.home-header:not(.scrolled-header) svg path {
                 fill: #fff !important;
             }
+            header.prague-header.scrolled-header .main-menu > li > a:hover {
+                color: var(--gold) !important;
+            }
 
-            /* Subpage specific: Start solid white background / Dark text */
+            /* Subpage specific: Dark background / White text */
             header.prague-header.sub-page-header:not(.scrolled-header) {
-                background-color: #fff !important;
+                background-color: #111 !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
             }
             header.prague-header.sub-page-header:not(.scrolled-header) .main-menu > li > a,
@@ -86,10 +52,10 @@
             header.prague-header.sub-page-header:not(.scrolled-header) .prague-social-nav a,
             header.prague-header.sub-page-header:not(.scrolled-header) span,
             header.prague-header.sub-page-header:not(.scrolled-header) i {
-                color: #222 !important;
+                color: #fff !important;
             }
             header.prague-header.sub-page-header:not(.scrolled-header) svg path {
-                fill: #222 !important;
+                fill: #fff !important;
             }
         </style>
         <script>
@@ -108,28 +74,10 @@
         
         <div class="prague-logo">
             <a href="/" class="prague-logo-wrapper">
-                <!-- If it is home page and NOT scrolled -> Show logo for dark background -->
-                <!-- Else if it is sub page OR scrolled -> Show logo for light background -->
-                <img id="dynamic-logo" src="{% if slider_img %}{% static 'img/home/palladian_1.png' %}{% else %}{% static 'img/home/pd_dark1.jpeg' %}{% endif %}" class="image_logo" alt="Palladian Designers Logo" />
+                <img src="{% static 'img/home/palladian_1.png' %}" class="image_logo" alt="Palladian Designers Logo" />
             </a>
         </div>
-        
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const logo = document.getElementById('dynamic-logo');
-                const homeLogo = "{% static 'img/home/palladian_1.png' %}";
-                const subLogo = "{% static 'img/home/pd_dark1.jpeg' %}";
-                const isHome = {% if slider_img %} true {% else %} false {% endif %};
-
-                window.addEventListener("scroll", function() {
-                    if (window.scrollY > 40) {
-                        logo.src = subLogo;
-                    } else {
-                        logo.src = isHome ? homeLogo : subLogo;
-                    }
-                });
-            });
-        </script>
+        <!--/LOGO-->
         <!--/LOGO-->
 
         <div class="prague-header-wrapper">
