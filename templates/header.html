@@ -42,6 +42,18 @@
                 color: var(--gold, #c5a059) !important; /* Gold hover from your theme */
             }
 
+            /* Home Page INITIAL state: Transparent background / White text */
+            header.prague-header.home-header:not(.scrolled-header) .main-menu > li > a,
+            header.prague-header.home-header:not(.scrolled-header) .icon-mob-menu,
+            header.prague-header.home-header:not(.scrolled-header) .prague-social-nav a,
+            header.prague-header.home-header:not(.scrolled-header) span,
+            header.prague-header.home-header:not(.scrolled-header) i {
+                color: #ffffff !important;
+            }
+            header.prague-header.home-header:not(.scrolled-header) svg path {
+                fill: #ffffff !important;
+            }
+
             /* Subpage specific (non-Home): Start white background with theme-friendly dark text */
             header.prague-header.sub-page-header:not(.scrolled-header) {
                 background-color: #ffffff !important;
