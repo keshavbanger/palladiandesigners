@@ -1,13 +1,4 @@
 {% load static %}
-
-<!-- PRE-FOOTER CTA STRIP -->
-<div style="background: var(--gold, #c5a059); padding: 40px 0; text-align: center;">
-    <div class="container">
-        <h3 style="color: #fff; margin: 0 0 20px 0; font-size: 28px; font-weight: 700; letter-spacing: 1px;">Ready to bring your vision to life? Let's talk.</h3>
-        <a href="{% url 'contactus' %}" style="display: inline-block; background: #fff; color: #111; padding: 12px 30px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; border-radius: 3px; transition: all 0.3s ease;" onmouseover="this.style.background='#111'; this.style.color='#fff';" onmouseout="this.style.background='#fff'; this.style.color='#111';">Get a Free Consultation</a>
-    </div>
-</div>
-
 <footer style="background:#111; color:#aaa; padding:60px 0 0 0;">
     <div class="container">
         <div class="row">
@@ -15,7 +6,7 @@
             <!-- Column 1: Logo + description -->
             <div class="col-sm-6 col-md-3" style="margin-bottom:40px;">
                 <a href="{% url 'index' %}">
-                    <img src="{% static 'img/home/palladian_1.png' %}" width="160" alt="Palladian Designers Logo"
+                    <img src="{% static 'img/home/palladian_1.png' %}" width="130" alt="Palladian Designers Logo"
                          style="filter:brightness(10); margin-bottom:18px; display:block;" />
                 </a>
                 <p style="font-size:13px; line-height:1.8; color:#777;">
@@ -47,12 +38,12 @@
                 <h6 style="color:#fff; font-size:12px; letter-spacing:3px; text-transform:uppercase; margin-bottom:20px;">Contact Info</h6>
                 <ul style="list-style:none; padding:0; margin:0; font-size:13px; line-height:2;">
                     <li>
-                        <a href="tel:{{ footer_content.contact_no|default:'+918269032294' }}" style="color:#777; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">
-                            📞 {{ footer_content.contact_no|default:"+91 82690 32294" }}
+                        <a href="tel:{{ footer_content.contact_no }}" style="color:#777; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">
+                            📞 {{ footer_content.contact_no|default:"+91 9999999999" }}
                         </a>
                     </li>
                     <li>
-                        <a href="mailto:{{ footer_content.mail|default:'info@palladiandesigners.com' }}" style="color:#777; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">
+                        <a href="mailto:{{ footer_content.mail }}" style="color:#777; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#777'">
                             ✉️ {{ footer_content.mail|default:"info@palladiandesigners.com" }}
                         </a>
                     </li>
@@ -89,7 +80,7 @@
                         <i class="fa fa-facebook" aria-hidden="true"></i>
                     </a>
                     <!-- WhatsApp -->
-                    <a href="https://wa.me/918269032294" target="_blank" rel="noopener"
+                    <a href="https://wa.me/919999999999" target="_blank" rel="noopener"
                        style="width:40px; height:40px; border:1px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#aaa; text-decoration:none; font-size:16px; transition:all 0.2s;"
                        onmouseover="this.style.background='#25D366';this.style.borderColor='#25D366';this.style.color='#fff'"
                        onmouseout="this.style.background='transparent';this.style.borderColor='#333';this.style.color='#aaa'"
@@ -107,8 +98,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6" style="color:#555; font-size:12px; letter-spacing:1px;">
-                    &copy; <span id="copyright-year">2026</span> Palladian Designers Pvt. Ltd. All rights reserved.
-                    <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
+                    &copy; 2024 Palladian Designers Pvt. Ltd. All rights reserved.
                 </div>
                 <div class="col-sm-6" style="text-align:right; color:#555; font-size:12px;">
                     Design &amp; BIM Solutions — Indore, India

@@ -16,25 +16,21 @@
             
             /* Scroll-triggered styling */
             header.prague-header {
-                transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease !important;
+                transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease !important;
                 padding-top: 15px !important;
                 padding-bottom: 15px !important;
             }
             header.prague-header.scrolled-header {
-                background-color: rgba(255, 255, 255, 0.85) !important;
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+                background-color: rgba(255, 255, 255, 0.98) !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
                 padding-top: 5px !important;
                 padding-bottom: 5px !important;
                 height: auto !important;
                 min-height: 0 !important;
             }
             header.prague-header.dark.scrolled-header {
-                background-color: rgba(10, 10, 10, 0.85) !important;
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4) !important;
+                background-color: rgba(20, 20, 20, 0.95) !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
                 padding-top: 5px !important;
                 padding-bottom: 5px !important;
             }
@@ -65,70 +61,7 @@
                 fill: #222 !important;
             }
             header.prague-header.scrolled-header .main-menu > li > a:hover {
-                color: var(--gold, #c5a059) !important; /* Add subtle gold hover effect from existing theme */
-            }
-
-            /* Active link indicator and Sub-menu Dropdowns */
-            ul.main-menu > li.active-nav-item > a {
-                color: var(--gold, #c5a059) !important;
-                border-bottom: 2px solid var(--gold, #c5a059);
-            }
-            ul.main-menu > li.menu-item-has-children:hover > ul.sub-menu {
-                display: block !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-            }
-            ul.sub-menu {
-                display: none;
-                position: absolute;
-                background: #fff;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-                padding: 10px 0;
-                list-style: none;
-                min-width: 200px;
-                text-align: left;
-                border-top: 2px solid var(--gold, #c5a059);
-                z-index: 999;
-            }
-            ul.sub-menu li a {
-                padding: 10px 20px;
-                display: block;
-                color: #333;
-                text-transform: none;
-                font-size: 13px;
-                font-weight: 500;
-                transition: background 0.2s;
-            }
-            ul.sub-menu li a:hover {
-                background: #f9f9f9;
-                color: var(--gold, #c5a059);
-            }
-
-            /* Pulse Glow for GET A QUOTE */
-            @keyframes pulseGlow {
-              0% { box-shadow: 0 0 0 0 rgba(216, 27, 96, 0.6); }
-              70% { box-shadow: 0 0 0 15px rgba(216, 27, 96, 0); }
-              100% { box-shadow: 0 0 0 0 rgba(216, 27, 96, 0); }
-            }
-            .btn-quote-glow {
-                border: 2px solid #d81b60 !important;
-                color: #d81b60 !important;
-                background: transparent;
-                animation: pulseGlow 2s infinite;
-                border-radius: 4px;
-                font-weight: 700 !important;
-                transition: all 0.3s ease;
-            }
-            .btn-quote-glow:hover {
-                background: #d81b60 !important;
-                color: #fff !important;
-            }
-            header.prague-header.scrolled-header .btn-quote-glow {
-                border-color: #d81b60 !important;
-                color: #d81b60 !important;
-            }
-            header.prague-header.scrolled-header .btn-quote-glow:hover {
-                color: #fff !important;
+                color: var(--gold) !important; /* Add subtle gold hover effect from existing theme */
             }
         </style>
         <script>
@@ -140,16 +73,6 @@
                         header.classList.add("scrolled-header");
                     } else {
                         header.classList.remove("scrolled-header");
-                    }
-                });
-
-                /* Auto-assign active-nav-item class based on URL */
-                const currentPath = window.location.pathname;
-                const navLinks = document.querySelectorAll('ul.main-menu > li > a');
-                navLinks.forEach(link => {
-                    const linkPath = new URL(link.href).pathname;
-                    if (currentPath === linkPath && linkPath !== '/' || (currentPath === '/' && linkPath === '/')) {
-                        link.parentElement.classList.add('active-nav-item');
                     }
                 });
             });
@@ -346,13 +269,7 @@
                                 <a href="{% url 'about' %}">About Us</a>
                                 </li>
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
-                                    <a href="/#services">Services</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="/#services">BIM Solutions</a></li>
-                                        <li><a href="/#services">Interior Design</a></li>
-                                        <li><a href="/#services">Exterior Architecture</a></li>
-                                        <li><a href="/#services">3D Conversion</a></li>
-                                    </ul>
+                                <a href="/#services">Services</a>
                                 </li>
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
                                 <a href="{% url 'projects' %}">Projects</a>
@@ -406,7 +323,7 @@
         </div>
         {% endif %}
             <div class="header-cta" style="display: inline-block; vertical-align: middle; margin-right: 20px;">
-                <a href="{% url 'contactus' %}" class="a-btn simple btn-quote-glow" style="padding: 10px 20px; font-size: 11px;">GET A QUOTE</a>
+                <a href="{% url 'contactus' %}" class="a-btn simple" style="padding: 10px 20px; font-size: 10px; border: 1px solid currentColor;">GET A QUOTE</a>
             </div>
             <!-- mobile icon -->
             <div class="prague-nav-menu-icon">
