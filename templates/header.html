@@ -63,6 +63,18 @@
             header.prague-header.scrolled-header .main-menu > li > a:hover {
                 color: var(--gold) !important; /* Add subtle gold hover effect from existing theme */
             }
+
+            /* Ensure light headers on sub-pages have dark text for visibility */
+            header.prague-header.light:not(.scrolled-header) .main-menu > li > a,
+            header.prague-header.light:not(.scrolled-header) .icon-mob-menu,
+            header.prague-header.light:not(.scrolled-header) .prague-social-nav a,
+            header.prague-header.light:not(.scrolled-header) span,
+            header.prague-header.light:not(.scrolled-header) i {
+                color: #222 !important;
+            }
+            header.prague-header.light:not(.scrolled-header) svg path {
+                fill: #222 !important;
+            }
         </style>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
