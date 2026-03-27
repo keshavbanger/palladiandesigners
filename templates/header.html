@@ -59,6 +59,22 @@
                 background-color: transparent !important;
                 box-shadow: none !important;
             }
+
+            /* FORCE SOLID WHITE HEADER ON PROJECTS: (When header_dark specifically passed from view) */
+            header.prague-header.sub-page-header.dark:not(.scrolled-header) {
+                background-color: #ffffff !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+            }
+            header.prague-header.sub-page-header.dark:not(.scrolled-header) .main-menu > li > a,
+            header.prague-header.sub-page-header.dark:not(.scrolled-header) .icon-mob-menu,
+            header.prague-header.sub-page-header.dark:not(.scrolled-header) .prague-social-nav a,
+            header.prague-header.sub-page-header.dark:not(.scrolled-header) span,
+            header.prague-header.sub-page-header.dark:not(.scrolled-header) i {
+                color: #222 !important;
+            }
+            header.prague-header.sub-page-header.dark:not(.scrolled-header) svg path {
+                fill: #222 !important;
+            }
         </style>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
