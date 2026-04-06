@@ -13,6 +13,17 @@
             .prague-logo-wrapper {
                 display: inline-block;
                 transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.85); /* White backplate for logo visibility */
+                padding: 10px 20px;
+                border-radius: 4px;
+                backdrop-filter: blur(5px);
+                margin: 10px;
+            }
+            header.prague-header.scrolled-header .prague-logo-wrapper {
+                background: transparent !important; /* Hide backplate when header is already white */
+                padding: 0;
+                margin: 0;
+                backdrop-filter: none;
             }
             
             /* Scroll-triggered styling */
