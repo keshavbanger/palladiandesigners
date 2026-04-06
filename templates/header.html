@@ -13,51 +13,61 @@
             .prague-logo-wrapper {
                 display: inline-block;
                 transition: all 0.3s ease;
-                background: linear-gradient(to right, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 70%, transparent 100%);
-                backdrop-filter: blur(8px); /* Soft architectural glass effect */
-                border-left: 4px solid var(--gold, #c5a059); /* Signature gold accent */
-                padding: 10px 100px 10px 30px; /* Generous right padding for a smooth fade-out */
-                margin-top: -5px;
-                pointer-events: none;
             }
             .prague-logo-wrapper img {
                 pointer-events: auto;
-                filter: none !important; /* Remove individual shadows, rely on the backplate */
-            }
-            header.prague-header.scrolled-header .prague-logo-wrapper {
-                background: transparent !important;
-                border-left: none !important;
-                padding: 0;
-                margin: 0;
-                backdrop-filter: none;
             }
             
-            /* No solid background or shadow for any header until scroll */
+            /* Glassmorphism White Blend on WHOLE HEADER */
             header.prague-header:not(.scrolled-header) {
-                background-color: transparent !important;
-                box-shadow: none !important;
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%) !important;
+                backdrop-filter: blur(10px);
+                border-top: 3px solid var(--gold, #c5a059); /* Signature gold accent at the very top */
+                transition: all 0.3s ease;
+                padding-top: 25px !important;
+                padding-bottom: 40px !important; /* Extra bottom padding for the blend to feel deep */
+            }
+            
+            header.prague-header.scrolled-header .prague-logo-wrapper {
+                background: transparent !important;
+                padding: 0;
+                margin: 0;
+            }
+            
+            /* All pages (Home & Subpages) INITIAL state: Contrast text for the white header blend */
+            header.prague-header:not(.scrolled-header) .main-menu > li > a,
+            header.prague-header:not(.scrolled-header) .icon-mob-menu,
+            header.prague-header:not(.scrolled-header) .prague-social-nav a,
+            header.prague-header:not(.scrolled-header) span,
+            header.prague-header:not(.scrolled-header) i {
+                color: #222222 !important; /* Dark text for readability on white blend */
+            }
+            header.prague-header:not(.scrolled-header) svg path {
+                fill: #222222 !important;
             }
             
             /* Scroll-triggered styling */
             header.prague-header {
-                transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease !important;
+                transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, background 0.3s ease !important;
                 padding-top: 15px !important;
                 padding-bottom: 15px !important;
             }
             header.prague-header.scrolled-header {
-                background-color: rgba(255, 255, 255, 0.98) !important; /* Back to white background */
+                background-color: rgba(255, 255, 255, 0.98) !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
                 padding-top: 5px !important;
                 padding-bottom: 5px !important;
                 height: auto !important;
                 min-height: 0 !important;
+                backdrop-filter: none;
+                border-top: none;
             }
             header.prague-header.scrolled-header .main-menu > li > a,
             header.prague-header.scrolled-header .icon-mob-menu,
             header.prague-header.scrolled-header .prague-social-nav a,
             header.prague-header.scrolled-header span,
             header.prague-header.scrolled-header i {
-                color: #222 !important; /* Theme-friendly dark grey for white header */
+                color: #222 !important;
             }
             header.prague-header.scrolled-header svg path {
                 fill: #222 !important;
@@ -67,31 +77,12 @@
                 letter-spacing: 1px !important;
             }
             header.prague-header.scrolled-header .main-menu > li > a:hover {
-                color: var(--gold, #c5a059) !important; /* Gold hover from your theme */
+                color: var(--gold, #c5a059) !important;
             }
-
-            /* All pages (Home & Subpages) INITIAL state: Transparent background / White text */
-            header.prague-header:not(.scrolled-header) .main-menu > li > a,
-            header.prague-header:not(.scrolled-header) .icon-mob-menu,
-            header.prague-header:not(.scrolled-header) .prague-social-nav a,
-            header.prague-header:not(.scrolled-header) span,
-            header.prague-header:not(.scrolled-header) i {
-                color: #ffffff !important;
-            }
-            header.prague-header:not(.scrolled-header) svg path {
-                fill: #ffffff !important;
-            }
-
-            /* No solid background or shadow for any header until scroll */
-            header.prague-header:not(.scrolled-header) {
-                background-color: transparent !important;
-                box-shadow: none !important;
-            }
-
-            /* FORCE SOLID WHITE HEADER ON PROJECTS: (When header_dark specifically passed from view) */
             header.prague-header.sub-page-header.dark:not(.scrolled-header) {
                 background-color: #ffffff !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+                backdrop-filter: none;
             }
             header.prague-header.sub-page-header.dark:not(.scrolled-header) .main-menu > li > a,
             header.prague-header.sub-page-header.dark:not(.scrolled-header) .icon-mob-menu,
