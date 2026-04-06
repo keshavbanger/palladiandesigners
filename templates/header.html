@@ -16,8 +16,12 @@
             }
             .prague-logo-wrapper img {
                 pointer-events: auto;
-                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); /* Multi-layered glow for maximum visibility without the 'box' look */
                 transition: all 0.3s ease;
+            }
+            
+            /* Change logo color to WHITE for transparent header visibility */
+            header.prague-header:not(.scrolled-header) .image_logo {
+                filter: brightness(0) invert(1) !important; /* Forces dark logo to pure white */
             }
             
             /* Initial State: Clean top-blend with white text */
