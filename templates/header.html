@@ -16,61 +16,51 @@
             }
             .prague-logo-wrapper img {
                 pointer-events: auto;
+                transition: opacity 0.3s ease, transform 0.3s ease;
             }
             
-            /* Glassmorphism White Blend on WHOLE HEADER */
+            /* Initial State: Dynamic Visionary Top Shadow */
             header.prague-header:not(.scrolled-header) {
-                background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%) !important;
-                backdrop-filter: blur(10px);
-                border-top: 3px solid var(--gold, #c5a059); /* Signature gold accent at the very top */
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%) !important;
+                backdrop-filter: blur(3px); /* Very subtle depth focus */
                 transition: all 0.3s ease;
-                padding-top: 25px !important;
-                padding-bottom: 40px !important; /* Extra bottom padding for the blend to feel deep */
+                padding-top: 15px !important;
+                padding-bottom: 25px !important;
             }
             
-            header.prague-header.scrolled-header .prague-logo-wrapper {
-                background: transparent !important;
-                padding: 0;
-                margin: 0;
-            }
-            
-            /* All pages (Home & Subpages) INITIAL state: Contrast text for the white header blend */
+            /* White text for initial dark-blend state */
             header.prague-header:not(.scrolled-header) .main-menu > li > a,
             header.prague-header:not(.scrolled-header) .icon-mob-menu,
             header.prague-header:not(.scrolled-header) .prague-social-nav a,
             header.prague-header:not(.scrolled-header) span,
             header.prague-header:not(.scrolled-header) i {
-                color: #222222 !important; /* Dark text for readability on white blend */
+                color: #ffffff !important;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.1);
             }
             header.prague-header:not(.scrolled-header) svg path {
-                fill: #222222 !important;
+                fill: #ffffff !important;
             }
             
-            /* Scroll-triggered styling */
+            /* Scrolled State: Solid Clean Minimalism */
             header.prague-header {
                 transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, background 0.3s ease !important;
-                padding-top: 15px !important;
-                padding-bottom: 15px !important;
             }
             header.prague-header.scrolled-header {
                 background-color: rgba(255, 255, 255, 0.98) !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
                 padding-top: 5px !important;
                 padding-bottom: 5px !important;
-                height: auto !important;
-                min-height: 0 !important;
                 backdrop-filter: none;
-                border-top: none;
             }
             header.prague-header.scrolled-header .main-menu > li > a,
             header.prague-header.scrolled-header .icon-mob-menu,
             header.prague-header.scrolled-header .prague-social-nav a,
             header.prague-header.scrolled-header span,
             header.prague-header.scrolled-header i {
-                color: #222 !important;
+                color: #111111 !important;
             }
             header.prague-header.scrolled-header svg path {
-                fill: #222 !important;
+                fill: #111111 !important;
             }
             header.prague-header .main-menu > li > a {
                 font-weight: 500 !important;
@@ -79,39 +69,33 @@
             header.prague-header.scrolled-header .main-menu > li > a:hover {
                 color: var(--gold, #c5a059) !important;
             }
-            header.prague-header.sub-page-header.dark:not(.scrolled-header) {
-                background-color: #ffffff !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-                backdrop-filter: none;
-            }
-            header.prague-header.sub-page-header.dark:not(.scrolled-header) .main-menu > li > a,
-            header.prague-header.sub-page-header.dark:not(.scrolled-header) .icon-mob-menu,
-            header.prague-header.sub-page-header.dark:not(.scrolled-header) .prague-social-nav a,
-            header.prague-header.sub-page-header.dark:not(.scrolled-header) span,
-            header.prague-header.sub-page-header.dark:not(.scrolled-header) i {
-                color: #222 !important;
-            }
-            header.prague-header.sub-page-header.dark:not(.scrolled-header) svg path {
-                fill: #222 !important;
-            }
         </style>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const header = document.querySelector("header.prague-header");
-                if (window.scrollY > 40) header.classList.add("scrolled-header");
-                window.addEventListener("scroll", function() {
-                    if (window.scrollY > 40) {
+                const logo = document.querySelector(".image_logo");
+                const whiteLogo = "{% static 'img/home/logo-white.png' %}";
+                const darkLogo = "{% static 'img/home/palladian_1.png' %}";
+                
+                function updateHeader() {
+                    const isSubPageDark = header.classList.contains('dark') && header.classList.contains('sub-page-header');
+                    if (window.scrollY > 40 || isSubPageDark) {
                         header.classList.add("scrolled-header");
+                        if (logo) logo.src = darkLogo;
                     } else {
                         header.classList.remove("scrolled-header");
+                        if (logo) logo.src = whiteLogo;
                     }
-                });
+                }
+                
+                updateHeader(); // Run on load
+                window.addEventListener("scroll", updateHeader);
             });
         </script>
         
         <div class="prague-logo">
             <a href="/" class="prague-logo-wrapper">
-                <img src="{% static 'img/home/palladian_1.png' %}" class="image_logo" alt="Palladian Designers Logo" />
+                <img src="{% static 'img/home/logo-white.png' %}" class="image_logo" alt="Palladian Designers Logo" />
             </a>
         </div>
         <!--/LOGO-->
