@@ -7,7 +7,8 @@
                 width: auto !important;
                 max-width: none !important;
                 object-fit: contain;
-                transition: height 0.3s ease;
+                transition: all 0.3s ease;
+                filter: drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.8)); /* White glow for visibility on dark/busy images */
             }
             .prague-logo-wrapper {
                 display: inline-block;
@@ -314,7 +315,7 @@
                 <ul class="filter_item_category" id="categoryList">
                         <form method = "GET" action="{% url 'projects' %}" id="filterForm">
                         {% for proj_cat in project_cat %}
-                                <li data-filter="" onclick="updateHiddenInput({{ forloop.counter }}, {{proj_cat.id}})">{{ proj_cat.title }}</li>
+                                <li data-filter="" onclick="updateHiddenInput('{{ forloop.counter }}', '{{proj_cat.id}}')">{{ proj_cat.title }}</li>
                                 <input type="hidden" id="filter_val{{ forloop.counter }}" name="filter_val{{forloop.counter}}" />
                         {% endfor %}
                 </ul>
