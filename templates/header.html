@@ -13,22 +13,17 @@
             .prague-logo-wrapper {
                 display: inline-block;
                 transition: all 0.3s ease;
-                background: rgba(255, 255, 255, 0.85); /* White backplate for logo visibility */
-                padding: 10px 20px;
-                border-radius: 4px;
-                backdrop-filter: blur(5px);
-                margin: 10px;
             }
-            header.prague-header.scrolled-header .prague-logo-wrapper {
-                background: transparent !important; /* Hide backplate when header is already white */
-                padding: 0;
-                margin: 0;
-                backdrop-filter: none;
+            
+            /* Vignette shadow on the top of the header for better menu/logo blending */
+            header.prague-header:not(.scrolled-header) {
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%) !important;
+                box-shadow: none !important;
             }
             
             /* Scroll-triggered styling */
             header.prague-header {
-                transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease !important;
+                transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, background 0.3s ease !important;
                 padding-top: 15px !important;
                 padding-bottom: 15px !important;
             }
