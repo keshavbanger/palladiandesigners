@@ -13,19 +13,23 @@
             .prague-logo-wrapper {
                 display: inline-block;
                 transition: all 0.3s ease;
-                background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 70%, transparent 100%); /* Horizontal light blend */
-                padding: 10px 80px 10px 30px; /* Extra padding on the right for the blend effect */
-                border-radius: 0 50px 50px 0; /* Rounded edge that blends into the image */
-                margin-top: -10px;
-                pointer-events: none; /* Let clicks pass through the blend to the logo link if needed, though this is on the link itself */
+                background: linear-gradient(to right, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 70%, transparent 100%);
+                backdrop-filter: blur(8px); /* Soft architectural glass effect */
+                border-left: 4px solid var(--gold, #c5a059); /* Signature gold accent */
+                padding: 10px 100px 10px 30px; /* Generous right padding for a smooth fade-out */
+                margin-top: -5px;
+                pointer-events: none;
             }
             .prague-logo-wrapper img {
                 pointer-events: auto;
+                filter: none !important; /* Remove individual shadows, rely on the backplate */
             }
             header.prague-header.scrolled-header .prague-logo-wrapper {
                 background: transparent !important;
+                border-left: none !important;
                 padding: 0;
                 margin: 0;
+                backdrop-filter: none;
             }
             
             /* No solid background or shadow for any header until scroll */
