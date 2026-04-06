@@ -16,41 +16,41 @@
             }
             .prague-logo-wrapper img {
                 pointer-events: auto;
-                transition: opacity 0.3s ease, transform 0.3s ease;
+                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); /* Multi-layered glow for maximum visibility without the 'box' look */
+                transition: all 0.3s ease;
             }
             
-            /* Initial State: Dynamic Visionary Top Shadow */
+            /* Initial State: Clean top-blend with white text */
             header.prague-header:not(.scrolled-header) {
-                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%) !important;
-                backdrop-filter: blur(3px); /* Very subtle depth focus */
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%) !important;
                 transition: all 0.3s ease;
                 padding-top: 15px !important;
                 padding-bottom: 25px !important;
             }
             
-            /* White text for initial dark-blend state */
             header.prague-header:not(.scrolled-header) .main-menu > li > a,
             header.prague-header:not(.scrolled-header) .icon-mob-menu,
             header.prague-header:not(.scrolled-header) .prague-social-nav a,
             header.prague-header:not(.scrolled-header) span,
             header.prague-header:not(.scrolled-header) i {
                 color: #ffffff !important;
-                text-shadow: 0 1px 2px rgba(0,0,0,0.1);
             }
             header.prague-header:not(.scrolled-header) svg path {
                 fill: #ffffff !important;
             }
             
-            /* Scrolled State: Solid Clean Minimalism */
+            /* Scrolled State: Return to Theme Minimalism */
             header.prague-header {
                 transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, background 0.3s ease !important;
             }
             header.prague-header.scrolled-header {
                 background-color: rgba(255, 255, 255, 0.98) !important;
-                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
                 padding-top: 5px !important;
                 padding-bottom: 5px !important;
-                backdrop-filter: none;
+            }
+            header.prague-header.scrolled-header .prague-logo-wrapper img {
+                filter: none !important; /* No glow needed on white header */
             }
             header.prague-header.scrolled-header .main-menu > li > a,
             header.prague-header.scrolled-header .icon-mob-menu,
@@ -73,29 +73,21 @@
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const header = document.querySelector("header.prague-header");
-                const logo = document.querySelector(".image_logo");
-                const whiteLogo = "{% static 'img/home/logo-white.png' %}";
-                const darkLogo = "{% static 'img/home/palladian_1.png' %}";
-                
                 function updateHeader() {
-                    const isSubPageDark = header.classList.contains('dark') && header.classList.contains('sub-page-header');
-                    if (window.scrollY > 40 || isSubPageDark) {
+                    if (window.scrollY > 40) {
                         header.classList.add("scrolled-header");
-                        if (logo) logo.src = darkLogo;
                     } else {
                         header.classList.remove("scrolled-header");
-                        if (logo) logo.src = whiteLogo;
                     }
                 }
-                
-                updateHeader(); // Run on load
+                updateHeader();
                 window.addEventListener("scroll", updateHeader);
             });
         </script>
         
         <div class="prague-logo">
             <a href="/" class="prague-logo-wrapper">
-                <img src="{% static 'img/home/logo-white.png' %}" class="image_logo" alt="Palladian Designers Logo" />
+                <img src="{% static 'img/home/palladian_1.png' %}" class="image_logo" alt="Palladian Designers Logo" />
             </a>
         </div>
         <!--/LOGO-->
