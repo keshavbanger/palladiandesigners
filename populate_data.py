@@ -84,12 +84,12 @@ def populate():
         defaults={"feedback": "Facade and outdoor design was exactly like our dream. Professional from start to finish."}
     )
 
-    # 6. Team Members
-    TeamMember.objects.get_or_create(
-        name="Chirag Bhawsar",
-        designation="Founder & CEO",
-        social_profile="LinkedIn"
-    )
+    # 6. Team Members (Chirag removed)
+    # TeamMember.objects.get_or_create(
+    #     name="Chirag Bhawsar",
+    #     designation="Founder & CEO",
+    #     social_profile="LinkedIn"
+    # )
 
     # 7. Footer Content
     FooterContent.objects.update_or_create(
